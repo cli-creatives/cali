@@ -103,6 +103,18 @@
 
   .verdict{background:linear-gradient(135deg,#f0fdf4,#ecfdf5); border:1.5px solid #86efac; border-radius:14px; padding:18px 20px; margin:20px 0;}
   .verdict h3{margin-top:0; color:#15803d;}
+  .wine-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px; margin:16px 0 20px;}
+  .wine-card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; font-size:14px;}
+  .wine-card h3{margin:0 0 8px;}
+  .wine-card .tag{display:inline-block; margin-bottom:8px; padding:2px 9px; border-radius:999px; font-size:12px; font-weight:700;}
+  .wine-card.cool{border-color:#99f6e4;}
+  .wine-card.cool .tag{background:#ccfbf1; color:#0f766e;}
+  .wine-card.hot{border-color:#fed7aa;}
+  .wine-card.hot .tag{background:#ffedd5; color:#c2410c;}
+  .wine-card ul{margin:8px 0 0 18px;}
+  .wine-card li{margin:3px 0;}
+  .wine-card a{color:#2563eb; font-weight:700; text-decoration:none;}
+  .wine-card a:hover{text-decoration:underline;}
   .tips{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px;}
   .tip{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; font-size:14px;}
   .tip b{display:block; margin-bottom:4px;}
@@ -261,6 +273,38 @@
   <p><b>问题一：爸妈更在意「清爽舒服」还是「震撼反差」？</b>D 是舒适流——西雅图方向一路往北，红杉、火山湖、雪山野花、海湾城市，全程大多15-28°C，体感最轻松；E 是反差流——优胜美地、莫诺湖、死亡谷、拉斯维加斯，风景更戏剧化，但死亡谷和Vegas非常热。<b>问题二：爸爸愿意开多少？</b>E 只有13h（最轻方案，8/7还能整天不开车），D 要21h。<b>怕热优先选D；怕开车优先选E。</b>如果选E，必须接受死亡谷「车边观景」纪律：早晚下车、正午不走步道、白天多在车里/酒店/室内。</p>
 </div>
 
+<!-- ================= 顺路品酒 ================= -->
+<h2>🍷 顺路品酒：每条路线各放一个特色酒庄</h2>
+<p class="sub">爸妈如果不想认真喝酒，也可以把它当成“坐下来休息、看风景、买伴手礼”的轻松停靠点。建议只安排一站，驾驶员少喝或不喝，另一个人尝一点即可。</p>
+
+<div class="wine-grid">
+  <div class="wine-card cool">
+    <span class="tag">D线 · 清爽北上</span>
+    <h3>Cathedral Ridge Winery · Hood River</h3>
+    <p><b>放在 8/6 周四</b>：Multnomah 瀑布之后、去 Cascade Locks 明轮船或北上 Ashford 之前。Hood River 就在哥伦比亚河谷，风景是河谷+雪山+葡萄园，和D线“清爽山林”气质很搭。</p>
+    <ul>
+      <li><b>特色：</b>Columbia Gorge 酒区，品种很多，风格比 Napa 更轻松，适合尝 Pinot Noir、Riesling、Syrah 或白葡萄酒。</li>
+      <li><b>爸妈体验：</b>不用走路，坐着看山谷；不喝酒也可以拍照、买一瓶晚上回酒店喝。</li>
+      <li><b>路线影响：</b>比专门去 Willamette Valley 更顺路；如果当天还要明轮船，就把酒庄控制在45-60分钟。</li>
+      <li><b>备选：</b>如果想更有名的 Oregon Pinot，可改成 Portland 西南的 Willamette Valley，但会更绕、当天更累。</li>
+    </ul>
+    <p style="margin-top:8px"><a href="https://www.cathedralridgewinery.com/" target="_blank">查看酒庄官网</a></p>
+  </div>
+
+  <div class="wine-card hot">
+    <span class="tag">E线 · 高温反差</span>
+    <h3>Wente Vineyards · Livermore</h3>
+    <p><b>放在 8/3 周一</b>：Berkeley 出发后先到 Livermore，午前/午餐时段停一下，再继续去优胜美地。它比绕去 Napa/Sonoma 省时间很多，是E线最顺的品酒点。</p>
+    <ul>
+      <li><b>特色：</b>Livermore 老牌酒庄，美国历史很久的家族酒庄之一，Chardonnay 很有代表性，也适合尝 Sauvignon Blanc、Cabernet 等。</li>
+      <li><b>爸妈体验：</b>成熟、好停车、体验稳定；可以当成去优胜美地前的轻松午餐/休息点。</li>
+      <li><b>路线影响：</b>从 Berkeley 往 Yosemite 本来就会经过 East Bay/Livermore 方向，绕路最少。</li>
+      <li><b>提醒：</b>E线后面会越来越热，品酒最好放在第一天上午或中午，不要放到死亡谷/Vegas高温段。</li>
+    </ul>
+    <p style="margin-top:8px"><a href="https://wentevineyards.com/" target="_blank">查看酒庄官网</a></p>
+  </div>
+</div>
+
 <!-- ================= 逐日行程 ================= -->
 <h2>📅 逐日行程（点标签切换）</h2>
 <div class="tabs">
@@ -406,7 +450,7 @@
     <div class="day-photos">
       <div class="ph" data-photo-slot="D-0806-multnomah-falls" data-emoji="💧"><img src="assets/images/d/0806-multnomah-falls.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Multnomah Falls：两级大瀑布</div></div>
       <div class="ph" data-photo-slot="D-0806-columbia-sternwheeler" data-emoji="⛴️"><img src="assets/images/d/0806-columbia-gorge-sternwheeler.jpeg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Cascade Locks：哥伦比亚河峡谷明轮船</div></div>
-      <div class="ph" data-photo-slot="D-0806-rainier-paradise-evening" data-emoji="🗻"><img src="assets/images/d/0806-rainier-paradise-evening.jpeg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Mt. Rainier Paradise：傍晚雪山野花</div></div>
+      <div class="ph" data-photo-slot="D-0806-rainier-paradise-evening" data-emoji="🗻"><img src="assets/images/d/0806-rainier-paradise-evening.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Mt. Rainier Paradise：傍晚雪山野花</div></div>
     </div>
     <div class="tl">
       <div class="row"><div class="t">09:30</div><div class="x"><span class="drv">🚗 I-84 东行30min</span> Multnomah 瀑布——189m两级大瀑布，停车场对面即是<small class="q">⏳ 9:00-18:00使用I-84停车场需$2定时许可：7/23早7点PT（纽约早10点）在recreation.gov抢8/6的9:00-10:00时段，两天前有第二波放票</small><small>走到观瀑桥仅300m缓坡；8-10点人最少</small></div></div>
