@@ -97,6 +97,9 @@
   .ph.placeholder::before{content:attr(data-emoji); position:absolute; inset:0 0 18px; display:flex; align-items:center; justify-content:center; font-size:42px;}
   .ph.placeholder::after{content:"待替换图片"; position:absolute; top:8px; right:8px; padding:2px 7px; border-radius:999px; background:rgba(255,255,255,.9); color:#64748b; font-size:11px; font-weight:700;}
   .ph.placeholder .cap{color:#1f2937; background:linear-gradient(transparent,rgba(255,255,255,.92));}
+  .ph.wine-photo{background:linear-gradient(135deg,#fff7ed,#fef3c7); border:2px solid #f59e0b; box-shadow:0 8px 18px rgba(180,83,9,.14);}
+  .ph.wine-photo::after{content:"妈妈重点想去"; position:absolute; top:8px; right:8px; padding:3px 8px; border-radius:999px; background:#b45309; color:white; font-size:11px; font-weight:800;}
+  .ph.wine-photo .cap{color:#fff; background:linear-gradient(transparent,rgba(0,0,0,.68)); font-weight:700;}
   .day-photos{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:8px; padding:12px 16px 4px; background:#fff;}
   .day-photos .ph{border-radius:8px; aspect-ratio:16/9;}
   .day-photos .ph .cap{font-size:11.5px;}
@@ -107,6 +110,9 @@
   .wine-card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; font-size:14px;}
   .wine-card h3{margin:0 0 8px;}
   .wine-card .tag{display:inline-block; margin-bottom:8px; padding:2px 9px; border-radius:999px; font-size:12px; font-weight:700;}
+  .wine-photos{display:flex; gap:10px; margin:8px 0 8px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding-bottom:6px;}
+  .wine-photos .ph{aspect-ratio:16/11; border-radius:9px; flex:0 0 88%; scroll-snap-align:start;}
+  .swipe-hint{font-size:12px; color:var(--sub); margin:-2px 0 10px;}
   .wine-card.cool{border-color:#99f6e4;}
   .wine-card.cool .tag{background:#ccfbf1; color:#0f766e;}
   .wine-card.hot{border-color:#fed7aa;}
@@ -115,6 +121,9 @@
   .wine-card li{margin:3px 0;}
   .wine-card a{color:#2563eb; font-weight:700; text-decoration:none;}
   .wine-card a:hover{text-decoration:underline;}
+  .wine-option{border:1px solid #fde68a; background:#fffbeb; border-radius:10px; padding:10px 12px; margin:10px 0; font-size:13px;}
+  .wine-option b{display:block; margin-bottom:3px; color:#92400e;}
+  .wine-option span{display:inline-block; margin:3px 5px 0 0; padding:2px 7px; border-radius:999px; background:#fff; border:1px solid #fcd34d; font-size:12px; font-weight:700;}
   .tips{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px;}
   .tip{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; font-size:14px;}
   .tip b{display:block; margin-bottom:4px;}
@@ -278,30 +287,62 @@
 <p class="sub">爸妈如果不想认真喝酒，也可以把它当成“坐下来休息、看风景、买伴手礼”的轻松停靠点。建议只安排一站，驾驶员少喝或不喝，另一个人尝一点即可。</p>
 
 <div class="wine-grid">
-  <div class="wine-card cool">
-    <span class="tag">D线 · 清爽北上</span>
-    <h3>Cathedral Ridge Winery · Hood River</h3>
-    <p><b>放在 8/6 周四</b>：Multnomah 瀑布之后、去 Cascade Locks 明轮船或北上 Ashford 之前。Hood River 就在哥伦比亚河谷，风景是河谷+雪山+葡萄园，和D线“清爽山林”气质很搭。</p>
+  <div class="wine-card hot">
+    <span class="tag">① 人气最高 · Napa 名气版</span>
+    <div class="wine-photos">
+      <div class="ph wine-photo" data-photo-slot="napa-winery-1" data-emoji=""><img src="assets/images/e/napa-valley-winery-1.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Napa Valley：名庄酒庄</div></div>
+      <div class="ph wine-photo" data-photo-slot="napa-winery-2" data-emoji=""><img src="assets/images/e/napa-valley-winery-2.webp" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Napa Valley：葡萄园/品酒体验</div></div>
+    </div>
+    <div class="swipe-hint">左右滑动看 2 张 Napa 酒庄照片</div>
+    <h3>Napa Valley · 最有名的加州酒庄区</h3>
+    <p><b>适合妈妈最想体验“有名酒庄”的版本。</b>Napa 是最经典、最有名的加州酒庄目的地，拍照和仪式感最强；但它不是两条主线最顺路的点，放进D线或E线都需要牺牲一点当天节奏。</p>
     <ul>
-      <li><b>特色：</b>Columbia Gorge 酒区，品种很多，风格比 Napa 更轻松，适合尝 Pinot Noir、Riesling、Syrah 或白葡萄酒。</li>
-      <li><b>爸妈体验：</b>不用走路，坐着看山谷；不喝酒也可以拍照、买一瓶晚上回酒店喝。</li>
-      <li><b>路线影响：</b>比专门去 Willamette Valley 更顺路；如果当天还要明轮船，就把酒庄控制在45-60分钟。</li>
-      <li><b>备选：</b>如果想更有名的 Oregon Pinot，可改成 Portland 西南的 Willamette Valley，但会更绕、当天更累。</li>
+      <li><b>推荐放法：</b>8/3 上午从 Berkeley 出发先去 Napa Valley 半日，再接后续路线。</li>
+      <li><b>三选一：</b>Domaine Carneros（起泡酒+城堡感）、Castello di Amorosa（城堡酒庄）、Robert Mondavi（经典名庄）。</li>
+      <li><b>D线代价：</b>去 Napa 后再北上红杉，会绕路；8/3 红杉段要压缩，只保留一个重点停靠。</li>
+      <li><b>E线代价：</b>去 Napa 会比 Wente 绕，优胜美地当天到达会更晚；如果怕累，E线优先选 Wente。</li>
     </ul>
-    <p style="margin-top:8px"><a href="https://www.cathedralridgewinery.com/" target="_blank">查看酒庄官网</a></p>
+    <p style="margin-top:8px">
+      <a href="https://www.domainecarneros.com/" target="_blank">Domaine Carneros 官网</a> ·
+      <a href="https://castellodiamorosa.com/" target="_blank">Castello di Amorosa 官网</a> ·
+      <a href="https://www.robertmondaviwinery.com/" target="_blank">Robert Mondavi 官网</a>
+    </p>
   </div>
 
   <div class="wine-card hot">
-    <span class="tag">E线 · 高温反差</span>
+    <span class="tag">② 两条线都可走 · 最顺折中</span>
+    <div class="wine-photos">
+      <div class="ph wine-photo" data-photo-slot="E-winery-wente-1" data-emoji=""><img src="assets/images/e/0803-wente-vineyards-1.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Wente Vineyards：Livermore 酒庄</div></div>
+      <div class="ph wine-photo" data-photo-slot="E-winery-wente-2" data-emoji=""><img src="assets/images/e/0803-wente-vineyards-2.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Wente Vineyards：品酒停靠</div></div>
+    </div>
+    <div class="swipe-hint">左右滑动看 2 张酒庄照片</div>
     <h3>Wente Vineyards · Livermore</h3>
-    <p><b>放在 8/3 周一</b>：Berkeley 出发后先到 Livermore，午前/午餐时段停一下，再继续去优胜美地。它比绕去 Napa/Sonoma 省时间很多，是E线最顺的品酒点。</p>
+    <p><b>D线和E线都可以走。</b>Wente 在 Berkeley 东南方向，作为8/3出发后的第一站最容易安排；它没有 Napa 那么绕，又比普通路边酒庄更有历史和稳定体验。</p>
     <ul>
-      <li><b>特色：</b>Livermore 老牌酒庄，美国历史很久的家族酒庄之一，Chardonnay 很有代表性，也适合尝 Sauvignon Blanc、Cabernet 等。</li>
-      <li><b>爸妈体验：</b>成熟、好停车、体验稳定；可以当成去优胜美地前的轻松午餐/休息点。</li>
-      <li><b>路线影响：</b>从 Berkeley 往 Yosemite 本来就会经过 East Bay/Livermore 方向，绕路最少。</li>
-      <li><b>提醒：</b>E线后面会越来越热，品酒最好放在第一天上午或中午，不要放到死亡谷/Vegas高温段。</li>
+      <li><b>E线：</b>最推荐，Berkeley → Wente → Yosemite，路线最顺。</li>
+      <li><b>D线：</b>也能走，先去 Wente 再北上红杉；会比直接北上多一点绕路，但比 Napa 轻。</li>
+      <li><b>特色：</b>Livermore 老牌家族酒庄，Chardonnay 很有代表性，也适合尝 Sauvignon Blanc、Cabernet。</li>
+      <li><b>爸妈体验：</b>成熟、好停车、体验稳定，适合轻松午餐/休息/买酒。</li>
     </ul>
     <p style="margin-top:8px"><a href="https://wentevineyards.com/" target="_blank">查看酒庄官网</a></p>
+  </div>
+
+  <div class="wine-card cool">
+    <span class="tag">③ D线最顺 · 清爽河谷</span>
+    <div class="wine-photos">
+      <div class="ph wine-photo" data-photo-slot="D-winery-cathedral-ridge-1" data-emoji=""><img src="assets/images/d/0806-cathedral-ridge-winery-1.jpeg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Cathedral Ridge Winery：酒庄环境</div></div>
+      <div class="ph wine-photo" data-photo-slot="D-winery-cathedral-ridge-2" data-emoji=""><img src="assets/images/d/0806-cathedral-ridge-winery-2.jpeg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Hood River 河谷酒庄</div></div>
+    </div>
+    <div class="swipe-hint">左右滑动看 2 张酒庄照片</div>
+    <h3>Cathedral Ridge Winery · Hood River</h3>
+    <p><b>D线最顺、不折腾的酒庄。</b>放在8/6 Multnomah 瀑布之后，Hood River 就在哥伦比亚河谷，风景是河谷+雪山+葡萄园，和D线清爽山林气质很搭。</p>
+    <ul>
+      <li><b>路线影响：</b>比 Napa/Wente 更适合 D 线，不用第一天绕路。</li>
+      <li><b>特色：</b>Columbia Gorge 酒区，风格比 Napa 更轻松，适合尝 Pinot Noir、Riesling、Syrah 或白葡萄酒。</li>
+      <li><b>爸妈体验：</b>不用走路，坐着看山谷；不喝酒也可以拍照、买一瓶晚上回酒店喝。</li>
+      <li><b>取舍：</b>名气不如 Napa，但舒适度和顺路程度最好。</li>
+    </ul>
+    <p style="margin-top:8px"><a href="https://www.cathedralridgewinery.com/" target="_blank">查看酒庄官网</a></p>
   </div>
 </div>
 
@@ -386,7 +427,7 @@
   <div class="day"><div class="day-h"><b>8/3 周一 · Berkeley → 巨人大道红杉隧道</b><span class="meta">🚗 4h+0.5h ｜ 宿 Eureka / Trinidad</span></div>
     <div class="day-info">
       <div class="mini-map"><b>当天地图</b><div class="route-line"><span>Berkeley</span><i></i><span>Leggett</span><i></i><span>巨人大道</span><i></i><span>Trinidad</span></div><a class="map-link" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;origin=Berkeley,CA&amp;destination=Trinidad,CA&amp;waypoints=Chandelier+Drive-Thru+Tree,Leggett,CA|Avenue+of+the+Giants,CA">打开 8/3 Google 地图</a></div>
-      <div class="travel-info"><div class="info-chip"><strong>路线</strong>US-101 北上，Leggett 树洞后接巨人大道</div><div class="info-chip"><strong>住宿</strong>Eureka 更方便，Trinidad 海边更有度假感</div><div class="info-chip"><strong>车程</strong>约4.5小时，Willits 适合中途休息</div><div class="info-chip"><strong>提醒</strong>海边早晚有雾，外套放车上</div></div>
+      <div class="travel-info"><div class="info-chip"><strong>路线</strong>US-101 北上，Leggett 树洞后接巨人大道</div><div class="info-chip"><strong>酒庄优先版</strong>可先去 Wente 或 Napa 半日，但当天红杉段要删减</div><div class="info-chip"><strong>住宿</strong>Eureka 更方便，Trinidad 海边更有度假感</div><div class="info-chip"><strong>提醒</strong>海边早晚有雾，外套放车上</div></div>
     </div>
     <div class="day-photos">
       <div class="ph" data-photo-slot="D-0803-chandelier-tree" data-emoji="🌳"><img src="assets/images/d/0803-chandelier-tree.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Leggett：Chandelier Tree 开车穿树洞</div></div>
@@ -394,6 +435,7 @@
       <div class="ph" data-photo-slot="D-0803-trinidad-coast" data-emoji="🌊"><img src="assets/images/d/0803-trinidad-coast.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Trinidad 海岸：灯塔小镇/海边日落</div></div>
     </div>
     <div class="tl">
+      <div class="row"><div class="t">可选</div><div class="x">🍷 <b>妈妈酒庄优先版</b>：Berkeley 出发后先去 Wente Vineyards；如果更想要名气，就改 Napa Valley 选一家（Domaine Carneros / Castello di Amorosa / Robert Mondavi）<small>代价：当天会绕路，红杉巨人大道要压缩，只保留一个重点停靠，晚上到住宿点会更晚。</small></div></div>
       <div class="row"><div class="t">09:30</div><div class="x"><span class="drv">🚗 US-101 北上（约3h到Leggett）</span><small>出发前确认租车合同为「西雅图还车」单程价；中途 Willits 休息</small></div></div>
       <div class="row"><div class="t">12:30</div><div class="x">🌳 <b>开车穿树洞</b>：Leggett 的 Chandelier Tree——汽车从活着的红杉树洞里开过去（~$15/车）<small>就在101路边，拍照+小卖部午餐，30-40min</small></div></div>
       <div class="row"><div class="t">14:30</div><div class="x">Avenue of the Giants 巨人大道——50km老公路穿行在百米高红杉之间<small>车就开在树的隧道里，随停随拍；Founders Grove 平路环线走10-20min（世界最高树种就在头顶）</small></div></div>
@@ -442,24 +484,26 @@
     <div class="day-f"><span>👟 步行：观景台级</span><span>🌡️ 湖区海拔2100m，24/8°C</span><span>⏳ 无预约；正午Rim Village停车稍紧</span></div>
   </div>
 
-  <div class="day"><div class="day-h"><b>8/6 周四 · 大瀑布+明轮船 → 雷尼尔山脚 · 傍晚上天堂</b><span class="meta">🚗 0.5h+2.5h+0.7h ｜ 宿 Ashford</span></div>
+  <div class="day"><div class="day-h"><b>8/6 周四 · 大瀑布 → Hood River 酒庄 → 雷尼尔山脚</b><span class="meta">🚗 0.5h+0.3h+2.5h ｜ 宿 Ashford</span></div>
     <div class="day-info">
-      <div class="mini-map"><b>当天地图</b><div class="route-line"><span>Portland</span><i></i><span>Multnomah</span><i></i><span>Cascade Locks</span><i></i><span>Ashford</span><i></i><span>Paradise</span></div><a class="map-link" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;origin=Portland,OR&amp;destination=Paradise,Mount+Rainier+National+Park,WA&amp;waypoints=Multnomah+Falls,OR|Cascade+Locks,OR|Ashford,WA">打开 8/6 Google 地图</a></div>
-      <div class="travel-info"><div class="info-chip"><strong>路线</strong>哥伦比亚河谷看瀑布，再北上雷尼尔山脚</div><div class="info-chip"><strong>住宿</strong>Ashford 木屋/旅馆，第二天上山最顺</div><div class="info-chip"><strong>车程</strong>约3.7小时，不含明轮船时间</div><div class="info-chip"><strong>预订</strong>Multnomah I-84 停车许可 + 明轮船班次</div></div>
+      <div class="mini-map"><b>当天地图</b><div class="route-line"><span>Portland</span><i></i><span>Multnomah</span><i></i><span>Hood River 酒庄</span><i></i><span>Ashford</span><i></i><span>Paradise</span></div><a class="map-link" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;origin=Portland,OR&amp;destination=Paradise,Mount+Rainier+National+Park,WA&amp;waypoints=Multnomah+Falls,OR|Cathedral+Ridge+Winery,Hood+River,OR|Ashford,WA">打开 8/6 Google 地图</a></div>
+      <div class="travel-info"><div class="info-chip"><strong>路线</strong>哥伦比亚河谷看瀑布，顺路到 Hood River 酒庄，再北上雷尼尔山脚</div><div class="info-chip"><strong>酒庄</strong>Cathedral Ridge Winery：河谷+雪山+葡萄园，适合清爽D线</div><div class="info-chip"><strong>住宿</strong>Ashford 木屋/旅馆，第二天上山最顺</div><div class="info-chip"><strong>预订</strong>Multnomah 停车许可；酒庄建议提前看时段/预约</div></div>
     </div>
     <div class="day-photos">
       <div class="ph" data-photo-slot="D-0806-multnomah-falls" data-emoji="💧"><img src="assets/images/d/0806-multnomah-falls.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Multnomah Falls：两级大瀑布</div></div>
+      <div class="ph wine-photo" data-photo-slot="D-0806-cathedral-ridge-winery" data-emoji="🍷"><img src="assets/images/d/0806-cathedral-ridge-winery-1.jpeg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Cathedral Ridge Winery：Hood River 河谷酒庄</div></div>
       <div class="ph" data-photo-slot="D-0806-columbia-sternwheeler" data-emoji="⛴️"><img src="assets/images/d/0806-columbia-gorge-sternwheeler.jpeg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Cascade Locks：哥伦比亚河峡谷明轮船</div></div>
       <div class="ph" data-photo-slot="D-0806-rainier-paradise-evening" data-emoji="🗻"><img src="assets/images/d/0806-rainier-paradise-evening.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Mt. Rainier Paradise：傍晚雪山野花</div></div>
     </div>
     <div class="tl">
       <div class="row"><div class="t">09:30</div><div class="x"><span class="drv">🚗 I-84 东行30min</span> Multnomah 瀑布——189m两级大瀑布，停车场对面即是<small class="q">⏳ 9:00-18:00使用I-84停车场需$2定时许可：7/23早7点PT（纽约早10点）在recreation.gov抢8/6的9:00-10:00时段，两天前有第二波放票</small><small>走到观瀑桥仅300m缓坡；8-10点人最少</small></div></div>
-      <div class="row"><div class="t">11:30</div><div class="x">⛴️ <b>百年明轮船游峡谷</b>（可选）：往东20min到 Cascade Locks 码头，Sternwheeler 明轮船1-2h哥伦比亚峡谷巡游<small>坐着看两岸千米崖壁+瀑布群；订午间班次可在船上/码头午餐。若当天没有合适班次，改停 Vista House 观景台后直接北上，把时间留给傍晚的雪山</small></div></div>
-      <div class="row"><div class="t">13:30</div><div class="x"><span class="drv">🚗 北上华盛顿州 → Ashford（2.5h）</span>，入住木屋旅馆</div></div>
+      <div class="row"><div class="t">11:30</div><div class="x">🍷 <b>Hood River 酒庄停靠：Cathedral Ridge Winery</b><small>从 Multnomah 往东约25-30min，坐着看哥伦比亚河谷+葡萄园；建议45-60min，驾驶员少喝或不喝。这里比专门绕去 Willamette Valley 更顺路，也更符合D线清爽山谷感。</small></div></div>
+      <div class="row"><div class="t">12:45</div><div class="x">⛴️ <b>百年明轮船游峡谷</b>（可选）：若班次合适，回到 Cascade Locks 码头坐 Sternwheeler 1-2h<small>如果酒庄停得久，就二选一：酒庄 或 明轮船；不要两个都硬塞，避免下午赶路太累。</small></div></div>
+      <div class="row"><div class="t">14:30</div><div class="x"><span class="drv">🚗 北上华盛顿州 → Ashford（2.5h）</span>，入住木屋旅馆</div></div>
       <div class="row"><div class="t">17:00</div><div class="x"><span class="drv">🚗 上 Paradise（40min，$30/车，2026无需预约）</span>傍晚的野花草甸+金色雪山<small>此时停车场空、光线最好、旱獭出没——比周末白天体验好一个档次；8月日落约20:30，时间很够</small></div></div>
       <div class="row"><div class="t">19:45</div><div class="x">下山回 Ashford 晚餐</div></div>
     </div>
-    <div class="day-f"><span>👟 步行：瀑布300m+草甸随意</span><span>🌡️ 山上 17/8°C 带外套</span><span class="q">⏳ 瀑布$2许可</span></div>
+    <div class="day-f"><span>👟 步行：瀑布300m+草甸随意</span><span>🍷 酒庄：Cathedral Ridge Winery / Hood River</span><span>🌡️ 山上 17/8°C 带外套</span><span class="q">⏳ 瀑布$2许可；酒庄看时段</span></div>
   </div>
 
   <div class="day"><div class="day-h"><b>8/7 周五 · 蒸汽小火车 → 天堂野花 → 西雅图</b><span class="meta">🚂 2h + 🚗 0.7h+2.5h ｜ 宿西雅图市区</span></div>
@@ -561,6 +605,7 @@
       <div class="travel-info"><div class="info-chip"><strong>路线</strong>I-580 接 CA-120 进山，先到 Tunnel View</div><div class="info-chip"><strong>住宿</strong>首选 Yosemite Valley Lodge，订不到选 El Portal</div><div class="info-chip"><strong>车程</strong>约4小时，午后大门可能排队</div><div class="info-chip"><strong>提醒</strong>优胜美地谷内住宿是 E 方案最紧急预订项</div></div>
     </div>
     <div class="day-photos">
+      <div class="ph wine-photo" data-photo-slot="E-0803-wente-vineyards" data-emoji="🍇"><img src="assets/images/e/0803-wente-vineyards-1.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Wente Vineyards：Livermore 老牌酒庄</div></div>
       <div class="ph" data-photo-slot="E-0803-tunnel-view" data-emoji="🏔️"><img src="assets/images/e/0803-tunnel-view.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Tunnel View：半圆顶+酋长岩全景</div></div>
       <div class="ph" data-photo-slot="E-0803-yosemite-valley" data-emoji="🪨"><img src="assets/images/e/0803-yosemite-valley.jpeg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">优胜美地谷：花岗岩巨壁</div></div>
       <div class="ph" data-photo-slot="E-0803-bridalveil-fall" data-emoji="💧"><img src="assets/images/e/0803-bridalveil-fall.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Bridalveil Fall：8月水量较小</div></div>
