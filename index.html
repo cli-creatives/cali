@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>带爸妈的美西之旅 · 2026.7.31 – 8.9</title>
+<style>
+  :root{
+    --ink:#1f2937; --sub:#6b7280; --line:#e5e7eb; --bg:#faf9f7; --card:#ffffff;
+    --a:#d97706; --a-bg:#fef3c7;
+    --b:#dc2626; --b-bg:#fee2e2;
+    --c:#0d9488; --c-bg:#ccfbf1;
+    --d:#16a34a; --d-bg:#dcfce7;
+    --gold:#b45309;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; color:var(--ink); background:var(--bg); line-height:1.65;}
+  .wrap{max-width:980px; margin:0 auto; padding:24px 20px 80px;}
+  h1{font-size:30px; margin-bottom:6px;}
+  h2{font-size:22px; margin:48px 0 16px; padding-bottom:8px; border-bottom:2px solid var(--line);}
+  h3{font-size:17px; margin:20px 0 10px;}
+  .sub{color:var(--sub); font-size:14px;}
+  .pill{display:inline-block; padding:2px 10px; border-radius:999px; font-size:12px; font-weight:600;}
+
+  /* 顶部骨架 */
+  .frame{display:flex; gap:10px; margin-top:20px; flex-wrap:wrap;}
+  .frame .seg{flex:1; min-width:150px; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 14px;}
+  .frame .seg b{display:block; font-size:14px;}
+  .frame .seg span{font-size:12px; color:var(--sub);}
+  .frame .seg.hot{border-color:var(--gold); background:#fffbeb;}
+
+  .note{background:#fffbeb; border:1px solid #fcd34d; border-radius:12px; padding:14px 16px; margin:16px 0; font-size:14px;}
+  .note b{color:var(--gold);}
+
+  /* 地图 */
+  .mapbox{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; margin-top:12px;}
+  .legend{display:flex; gap:18px; flex-wrap:wrap; font-size:13px; margin-top:8px;}
+  .legend i{display:inline-block; width:22px; height:4px; border-radius:2px; margin-right:6px; vertical-align:middle;}
+
+  /* 对比表 */
+  table{width:100%; border-collapse:collapse; background:var(--card); border-radius:12px; overflow:hidden; font-size:14px;}
+  th,td{padding:10px 12px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top;}
+  th{background:#f3f4f6; font-size:13px; white-space:nowrap;}
+  td:first-child{font-weight:600; white-space:nowrap; color:var(--sub); font-size:13px;}
+  .win{background:#f0fdf4; font-weight:600;}
+  .tbl-scroll{overflow-x:auto; border-radius:12px; border:1px solid var(--line);}
+
+  /* Tabs */
+  .tabs{display:flex; gap:8px; margin:20px 0 0; flex-wrap:wrap;}
+  .tab{padding:10px 18px; border-radius:10px 10px 0 0; border:1px solid var(--line); border-bottom:none; background:#f3f4f6; cursor:pointer; font-size:15px; font-weight:600; color:var(--sub);}
+  .tab.on{background:var(--card); color:var(--ink); position:relative; top:1px;}
+  .tab .rec{font-size:11px; color:#16a34a;}
+  .panel{display:none; background:var(--card); border:1px solid var(--line); border-radius:0 12px 12px 12px; padding:20px;}
+  .panel.on{display:block;}
+
+  /* 天卡片 */
+  .day{border:1px solid var(--line); border-radius:12px; margin:14px 0; overflow:hidden;}
+  .day-h{padding:10px 16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;}
+  .day-h b{font-size:15px;}
+  .day-h .meta{font-size:12px; color:var(--sub);}
+  .A .day-h{background:var(--a-bg);} .B .day-h{background:var(--b-bg);} .C .day-h{background:var(--c-bg);} .D .day-h{background:var(--d-bg);} .E .day-h{background:var(--a-bg);}
+  .day-info{display:grid; grid-template-columns:minmax(190px,.85fr) minmax(0,1.4fr); gap:12px; padding:12px 16px; background:#fffdf8; border-bottom:1px solid var(--line);}
+  .mini-map{border:1px solid var(--line); border-radius:10px; padding:10px 12px; background:#fff; min-height:108px;}
+  .mini-map b,.travel-info b{display:block; font-size:12px; color:var(--sub); margin-bottom:6px;}
+  .route-line{display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-size:13px; font-weight:700;}
+  .route-line span{display:inline-flex; align-items:center; justify-content:center; min-width:26px; height:26px; padding:0 8px; border-radius:999px; background:#f3f4f6; border:1px solid #e5e7eb;}
+  .route-line i{flex:1; min-width:28px; max-width:68px; border-top:2px dashed #cbd5e1;}
+  .map-link{display:inline-block; margin-top:10px; color:#2563eb; font-size:13px; font-weight:700; text-decoration:none;}
+  .map-link:hover{text-decoration:underline;}
+  .travel-info{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px;}
+  .info-chip{border:1px solid #edf0f3; border-radius:9px; padding:8px 10px; background:#fff; font-size:12.5px;}
+  .info-chip strong{display:block; font-size:11px; color:var(--sub); margin-bottom:2px;}
+  .tl{padding:8px 16px 14px;}
+  .row{display:flex; gap:12px; padding:7px 0; border-bottom:1px dashed #f0f0ef; font-size:14px;}
+  .row:last-child{border-bottom:none;}
+  .row .t{flex:0 0 52px; font-weight:700; font-variant-numeric:tabular-nums; color:var(--sub); font-size:13px; padding-top:1px;}
+  .row .x{flex:1;}
+  .row .x small{display:block; color:var(--sub); font-size:12.5px;}
+  .drv{color:#2563eb; font-weight:600;}
+  .q{color:#dc2626; font-weight:600;}
+  .day-f{padding:8px 16px; background:#fafafa; font-size:12.5px; color:var(--sub); border-top:1px solid var(--line); display:flex; gap:16px; flex-wrap:wrap;}
+
+  /* 图片 */
+  .strip{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; margin:16px 0;}
+  .ph{position:relative; border-radius:10px; overflow:hidden; aspect-ratio:16/10; background:linear-gradient(135deg,#e0e7ff,#fde68a);}
+  .ph img{width:100%; height:100%; object-fit:cover; display:block;}
+  .ph .cap{position:absolute; left:0; right:0; bottom:0; padding:20px 10px 6px; font-size:12px; color:#fff; background:linear-gradient(transparent,rgba(0,0,0,.65));}
+  .ph.err img{display:none;}
+  .ph.err::before{content:attr(data-emoji); position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:44px;}
+  .ph.placeholder{background:linear-gradient(135deg,#f8fafc,#fef3c7); border:1px dashed #cbd5e1;}
+  .ph.placeholder::before{content:attr(data-emoji); position:absolute; inset:0 0 18px; display:flex; align-items:center; justify-content:center; font-size:42px;}
+  .ph.placeholder::after{content:"待替换图片"; position:absolute; top:8px; right:8px; padding:2px 7px; border-radius:999px; background:rgba(255,255,255,.9); color:#64748b; font-size:11px; font-weight:700;}
+  .ph.placeholder .cap{color:#1f2937; background:linear-gradient(transparent,rgba(255,255,255,.92));}
+  .day-photos{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:8px; padding:12px 16px 4px; background:#fff;}
+  .day-photos .ph{border-radius:8px; aspect-ratio:16/9;}
+  .day-photos .ph .cap{font-size:11.5px;}
+
+  .verdict{background:linear-gradient(135deg,#f0fdf4,#ecfdf5); border:1.5px solid #86efac; border-radius:14px; padding:18px 20px; margin:20px 0;}
+  .verdict h3{margin-top:0; color:#15803d;}
+  .tips{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px;}
+  .tip{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; font-size:14px;}
+  .tip b{display:block; margin-bottom:4px;}
+  .src{font-size:12px; color:var(--sub); margin-top:40px; border-top:1px solid var(--line); padding-top:12px;}
+  .src a{color:var(--sub);}
+  @media (max-width:640px){ .row .t{flex-basis:44px;} h1{font-size:24px;} .day-info{grid-template-columns:1fr;} .travel-info{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>🏜️ 带爸妈的美西之旅</h1>
+<p class="sub">2026.7.31 – 8.9 · 纽约出发 · 3人 · 轻松观景为主（不徒步、少爬山、9点起床）</p>
+
+<div class="frame">
+  <div class="seg"><b>7/31 周五 ✈️</b><span>纽约 → 旧金山湾区（约6.5h直飞）</span></div>
+  <div class="seg"><b>8/1–8/2 周末</b><span>Berkeley AI峰会（已定）· 爸妈倒时差/轻松逛</span></div>
+  <div class="seg hot"><b>8/3–8/8 · 6天</b><span>自驾主行程（本页重点）</span></div>
+  <div class="seg"><b>8/8晚 或 8/9 ✈️</b><span>从环线终点城市直飞回纽约</span></div>
+</div>
+
+<div class="note">
+  💡 <b>2026年新政策，先看这条：</b>从2026年起，11个热门国家公园对非美国居民收 <b>每人 $100 附加费</b>（16岁以上）。<b>优胜美地在名单上</b>（方案E散买合计$265，买一张 <b>$250 非居民版年票</b>反而省，持卡人+同车3名成人全覆盖）；<b>死亡谷、火山湖、雷尼尔、红杉都不在名单</b>（方案D合计仅~$62，年票不用买）。另外：<b>2026年 Yosemite、死亡谷、火山湖、Mt. Rainier 全部无需预约入园</b>，直接开进去即可。
+</div>
+
+<!-- ================= 地图 ================= -->
+<h2>🗺️ 先看地图：两个方案在哪里</h2>
+<p class="sub">示意图（非精确比例）。两条路线都从Berkeley出发、<b>全程零国内航班</b>，但方向完全相反：<b>方案E一路向东南</b>——翻过内华达山、穿过地球最热的死亡谷、收尾在赌城（拉斯维加斯直飞回纽约）；<b>方案D一路向北</b>——沿太平洋经红杉巨树、火山湖开到西雅图（西雅图直飞回纽约），沿途串了树洞、缆车、快艇、明轮船、蒸汽火车一串体验（小绿点）。</p>
+
+<div class="mapbox">
+<svg viewBox="0 0 640 710" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+  <!-- 海岸线 -->
+  <path d="M60,38 L46,62 L60,90 L75,150 L82,230 L90,315 L104,400 L118,460 L129,491 L150,530 L185,590 L235,636 L305,650 L332,692" fill="none" stroke="#94a3b8" stroke-width="2.5"/>
+  <text x="30" y="360" fill="#93c5fd" font-size="15" transform="rotate(-90 30 360)">太 平 洋</text>
+  <!-- 州界（简化） -->
+  <g stroke="#d1d5db" stroke-width="1" fill="none">
+    <line x1="75" y1="147" x2="480" y2="147"/>            <!-- WA/OR -->
+    <line x1="90" y1="315" x2="480" y2="315"/>            <!-- OR/CA·NV -->
+    <line x1="252" y1="315" x2="252" y2="399"/>           <!-- CA/NV 北段 -->
+    <line x1="252" y1="399" x2="437" y2="604"/>           <!-- CA/NV 斜线 -->
+    <line x1="483" y1="315" x2="483" y2="525"/>           <!-- NV/UT -->
+    <line x1="483" y1="525" x2="640" y2="525"/>           <!-- UT/AZ -->
+    <line x1="437" y1="604" x2="483" y2="558"/>
+    <line x1="483" y1="525" x2="483" y2="560"/>
+  </g>
+  <g fill="#c7ccd4" font-size="13" font-weight="700">
+    <text x="150" y="135">华盛顿州</text>
+    <text x="150" y="250">俄勒冈州</text>
+    <text x="160" y="430">加利福尼亚</text>
+    <text x="350" y="430">内华达</text>
+    <text x="520" y="440">犹他</text>
+    <text x="540" y="620">亚利桑那</text>
+  </g>
+
+  <!-- 方案E 琥珀 · 优胜美地+死亡谷+赌城 -->
+  <g stroke="#d97706" stroke-width="3.5" fill="none" stroke-linecap="round">
+    <path d="M136,488 C180,480 220,486 246,493"/>
+    <path d="M250,491 C257,489 263,487 268,487"/>
+    <path d="M272,490 C288,509 302,526 309,537"/>
+    <path d="M315,543 C328,546 342,547 354,548"/>
+    <path d="M368,549 C388,553 412,557 428,559"/>
+  </g>
+
+  <!-- 方案D 绿 · 火山纵贯线 -->
+  <g stroke="#16a34a" stroke-width="3.5" fill="none" stroke-linecap="round">
+    <path d="M133,486 C112,455 98,410 93,372"/>
+    <path d="M93,364 C92,350 93,336 95,326"/>
+    <path d="M97,321 C102,312 106,304 110,300"/>
+    <path d="M113,295 C122,290 131,286 138,282"/>
+    <path d="M143,274 C136,240 126,195 120,172"/>
+    <path d="M119,165 C132,148 146,128 153,116"/>
+    <path d="M155,108 C150,99 142,89 136,84"/>
+  </g>
+
+  <!-- 节点：主图 -->
+  <g font-size="12.5" font-weight="600" fill="#1f2937">
+    <circle cx="133" cy="80" r="5" fill="#16a34a"/><text x="142" y="78">西雅图·三文鱼船闸</text>
+    <circle cx="157" cy="111" r="4" fill="#16a34a"/><text x="166" y="116">雷尼尔山</text>
+    <circle cx="129" cy="491" r="6" fill="#334155"/><text x="88" y="480">旧金山</text>
+    <circle cx="139" cy="484" r="3.5" fill="#334155"/><text x="147" y="481">Berkeley</text>
+    <circle cx="92" cy="368" r="5" fill="#16a34a"/><text x="102" y="372">红杉NP·巨人大道</text>
+    <circle cx="96" cy="323" r="4" fill="#16a34a"/><text x="104" y="320">Crescent City</text>
+    <circle cx="142" cy="277" r="5" fill="#16a34a"/><text x="152" y="281">火山湖NP</text>
+    <circle cx="119" cy="168" r="4" fill="#16a34a"/><text x="129" y="176">波特兰</text>
+    <g font-size="10.5" fill="#15803d" font-weight="600">
+      <circle cx="98" cy="412" r="3.5" fill="#16a34a" stroke="#fff" stroke-width="1"/><text x="106" y="416">Leggett·开车穿树洞</text>
+      <circle cx="95" cy="340" r="3.5" fill="#16a34a" stroke="#fff" stroke-width="1"/><text x="103" y="344">红杉树冠缆车</text>
+      <circle cx="110" cy="298" r="3.5" fill="#16a34a" stroke="#fff" stroke-width="1"/><text x="118" y="302">Grants Pass·峡谷快艇晚餐</text>
+      <circle cx="151" cy="161" r="3.5" fill="#16a34a" stroke="#fff" stroke-width="1"/><text x="159" y="165">大瀑布·峡谷明轮船</text>
+      <circle cx="139" cy="118" r="3.5" fill="#16a34a" stroke="#fff" stroke-width="1"/><text x="46" y="122">Elbe·蒸汽小火车</text>
+    </g>
+    <circle cx="248" cy="493" r="5" fill="#d97706"/><text x="228" y="512">优胜美地</text>
+    <circle cx="270" cy="485" r="3.5" fill="#d97706"/><text x="278" y="483">莫诺湖</text>
+    <circle cx="312" cy="540" r="3.5" fill="#d97706"/><text x="230" y="533">Lone Pine·惠特尼峰</text>
+    <circle cx="362" cy="548" r="5" fill="#d97706"/><text x="336" y="568">死亡谷·Badwater</text>
+    <circle cx="435" cy="560" r="6" fill="#7c3aed"/><text x="410" y="582" fill="#7c3aed">拉斯维加斯</text>
+    <circle cx="305" cy="649" r="4" fill="#9ca3af"/><text x="313" y="654" fill="#9ca3af">洛杉矶</text>
+  </g>
+
+</svg>
+<div class="legend">
+  <span><i style="background:#d97706"></i>方案E：优胜美地+莫诺湖+死亡谷+赌城（一路向东南）</span>
+  <span><i style="background:#16a34a"></i>方案D：火山纵贯线 SF→西雅图（一路向北）</span>
+  <span style="color:#15803d">◦ 小绿点 = D沿途体验：树洞/缆车/快艇/明轮船/蒸汽火车/三文鱼</span>
+</div>
+</div>
+
+<!-- ================= 对比 ================= -->
+<h2>⚖️ 两大终选方案对比：E（东南线）vs D（北上线）</h2>
+<div class="tbl-scroll"><table>
+  <tr><th></th>
+    <th style="color:var(--a)">E · 优胜美地+死亡谷+赌城 ★</th>
+    <th style="color:var(--d)">D · 火山纵贯线 SF→西雅图 ★</th></tr>
+  <tr><td>国家公园数</td>
+    <td>2（优胜美地、死亡谷）+ 莫诺湖、Alabama Hills</td>
+    <td class="win">3（红杉、火山湖、雷尼尔）+ 哥伦比亚河谷</td></tr>
+  <tr><td>国内航班次数</td>
+    <td class="win">0 次</td>
+    <td class="win">0 次（两案打平，爸妈都只坐来回两程跨州航班）</td></tr>
+  <tr><td>风景类型</td>
+    <td class="win">反差最大：花岗岩巨壁 → 外星感高山湖 → 地球最热的盐漠恶地 → 赌城霓虹；8/6一天内「最高观景点→北美最低点→赌城」</td>
+    <td>红杉巨树 → 全美最深火山口湖 → 巨瀑 → 冰川雪山野花——清凉「山林系」渐进</td></tr>
+  <tr><td>体验节目</td>
+    <td>金级暗夜公园看银河、赌城秀/喷泉、胡佛水坝、（可选）大峡谷西缘玻璃桥</td>
+    <td class="win">最丰富：开车穿树洞、树冠缆车、峡谷快艇晚餐、百年明轮船、蒸汽小火车、三文鱼洄游</td></tr>
+  <tr><td>总车程 / 最长单日</td>
+    <td class="win">约13h / 4h——最轻，且8/7整天可以不摸方向盘</td>
+    <td><span class="q">约21h / 5.5h</span>，均摊每天3-3.5h</td></tr>
+  <tr><td>步行强度</td>
+    <td class="win">最低：死亡谷全部车边5-15分钟，Vegas随时回酒店</td>
+    <td class="win">低：巨树林平路、环湖观景台、瀑布停车即达</td></tr>
+  <tr><td>8月天气</td>
+    <td>山区凉爽；<span class="q">死亡谷47°C（已排早晚+车边）</span>、Vegas 41°C（夜间+室内）</td>
+    <td class="win">15-28°C 全程最舒适<br><small style="color:#9ca3af">⚠️ 8月俄勒冈偶有山火烟雾，行前看AQI</small></td></tr>
+  <tr><td>门票总成本(3人)</td>
+    <td>~$250：优胜美地是附加费公园（散买$235）+死亡谷$30——买一张$250非居民年票反而省</td>
+    <td class="win">~$62 最省：红杉免费、火山湖$30、雷尼尔$30，无附加费；体验项目另计</td></tr>
+  <tr><td>预约/排队风险</td>
+    <td>公园零预约；<span class="q">优胜美地谷内住宿最难订（现在就订）</span>；周一入园排20-40min；冰川点10:30后停车难</td>
+    <td>公园零预约；Multnomah 瀑布停车<span class="q">$2定时许可（7/23开抢8/6的）</span>+ 快艇/小火车订票</td></tr>
+  <tr><td>回程航班</td>
+    <td class="win">Vegas直飞纽约 ~5h（略短）</td>
+    <td>西雅图直飞纽约 ~5.5h</td></tr>
+  <tr><td>短板</td>
+    <td>死亡谷极端高温（纪律性要求高）；8月优胜美地瀑布干涸；Vegas午后必须躲室内</td>
+    <td>车程多8h；异地还车费$200-500；没有沙漠/赌城元素</td></tr>
+</table></div>
+
+<div class="verdict">
+  <h3>🏆 决赛圈：E 和 D 都是好答案，选哪个看两个问题</h3>
+  <p><b>问题一：爸妈更想看「热烈的地质奇观」还是「清凉的山林」？</b>E 是反差流——花岗岩巨壁、外星湖、地球最热盐漠、赌城霓虹，情绪浓度高，且带回一句可以讲一辈子的「我们8月去过死亡谷」；D 是舒适流——红杉、火山湖、雪山野花，全程15-28°C，每天还有小火车/快艇这类节目。<b>问题二：爸爸愿意开多少？</b>E 只有13h（最轻方案，8/7还能整天不开车），D 要21h。怕热选D、怕开车选E；两案都是零国内航班、零公园预约。<b>唯一硬约束</b>：选E必须接受死亡谷的「车边观景」纪律（行程已把谷底活动全排在早晚），且现在就抢优胜美地谷内住宿。</p>
+</div>
+
+<!-- ================= 逐日行程 ================= -->
+<h2>📅 逐日行程（点标签切换）</h2>
+<div class="tabs">
+  <div class="tab on" onclick="show('pe',this)">方案E <span class="rec">★经典加州+死亡谷+赌城</span></div>
+  <div class="tab" onclick="show('pd',this)">方案D <span class="rec">★火山纵贯线</span></div>
+</div>
+
+<!-- ========== 方案D ========== -->
+<div class="panel D" id="pd">
+  <div class="strip">
+    <div class="ph" data-photo-slot="D-overview-redwood" data-emoji="🌲"><img src="assets/images/d/overview-redwood-national-park.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">红杉国家公园</div></div>
+    <div class="ph" data-photo-slot="D-overview-crater-lake" data-emoji="🌋"><img src="assets/images/d/overview-crater-lake.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">火山湖 Crater Lake</div></div>
+    <div class="ph" data-photo-slot="D-overview-multnomah" data-emoji="💧"><img src="assets/images/d/overview-multnomah-falls.jpeg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Multnomah 瀑布</div></div>
+    <div class="ph" data-photo-slot="D-overview-rainier" data-emoji="🗻"><img src="assets/images/d/overview-mount-rainier.webp" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">雷尼尔雪山</div></div>
+  </div>
+  <p class="sub" style="margin-bottom:4px">✅ 零国内航班 · 3个国家公园顺路零回头 · 每天一个「非看景」节目：树洞→缆车→快艇→火山湖→明轮船→蒸汽火车→三文鱼。⚠️ 总车程约21h最长；需提前订：Hellgate快艇晚餐游、蒸汽小火车班次、7/23抢Multnomah $2停车许可；8月留意俄勒冈山火AQI。</p>
+
+  <div class="mapbox" style="margin:14px 0 6px">
+  <svg viewBox="0 0 460 645" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:460px;height:auto;display:block;margin:0 auto;">
+    <path d="M70,30 L60,90 L52,157 L60,250 L70,365 L82,430 L95,480 L118,560 L155,610 L205,626" fill="none" stroke="#94a3b8" stroke-width="2"/>
+    <text x="28" y="330" fill="#93c5fd" font-size="13" transform="rotate(-90 28 330)">太 平 洋</text>
+    <line x1="60" y1="157" x2="430" y2="157" stroke="#d1d5db" stroke-width="1"/>
+    <line x1="70" y1="365" x2="430" y2="365" stroke="#d1d5db" stroke-width="1"/>
+    <g fill="#c7ccd4" font-size="13" font-weight="700">
+      <text x="330" y="95">华盛顿</text>
+      <text x="330" y="265">俄勒冈</text>
+      <text x="320" y="500">加利福尼亚</text>
+    </g>
+    <g stroke="#16a34a" stroke-width="3.5" fill="none" stroke-linecap="round">
+      <path d="M232,605 C180,585 140,540 126,495"/>
+      <path d="M124,483 C117,474 113,468 112,464"/>
+      <path d="M110,455 C102,443 96,431 93,426"/>
+      <path d="M92,414 C90,403 90,392 90,384"/>
+      <path d="M94,376 C114,362 132,350 147,343"/>
+      <path d="M159,338 C188,329 214,320 236,315"/>
+      <path d="M240,306 C220,282 192,262 176,251"/>
+      <path d="M172,240 C180,214 192,185 199,169"/>
+      <path d="M204,155 C220,132 235,108 245,94"/>
+      <path d="M247,82 C241,68 234,54 229,47"/>
+    </g>
+    <path d="M208,159 C224,157 238,155 250,154" stroke="#16a34a" stroke-width="2" stroke-dasharray="4 3" fill="none"/>
+    <path d="M254,89 C259,88 263,88 266,87" stroke="#16a34a" stroke-width="2" stroke-dasharray="4 3" fill="none"/>
+    <g fill="#6b7280" font-size="11">
+      <text x="185" y="565">🚗 3h</text>
+      <text x="45" y="405">1h</text>
+      <text x="112" y="358">2.5h</text>
+      <text x="196" y="336">2h</text>
+      <text x="148" y="205">4h</text>
+      <text x="200" y="120">2.5h</text>
+      <text x="248" y="66">2.5h</text>
+    </g>
+    <g font-size="12" font-weight="600" fill="#134e4a">
+      <circle cx="232" cy="605" r="5" fill="#334155"/><text x="242" y="609" fill="#1f2937">Berkeley 出发</text>
+      <circle cx="124" cy="489" r="3.5" fill="#16a34a"/><text x="132" y="493">Leggett 开车穿树洞</text>
+      <circle cx="111" cy="461" r="3.5" fill="#16a34a"/><text x="120" y="465">巨人大道</text>
+      <circle cx="98" cy="393" r="3.5" fill="#16a34a"/><text x="106" y="397">树冠缆车·红杉NP</text>
+      <circle cx="243" cy="313" r="4.5" fill="#16a34a"/><text x="253" y="317">8/5午 火山湖NP</text>
+      <circle cx="260" cy="153" r="3.5" fill="#16a34a"/><text x="268" y="157">大瀑布+明轮船</text>
+      <circle cx="238" cy="89" r="3.5" fill="#16a34a"/><text x="118" y="80">Elbe蒸汽火车</text>
+      <circle cx="271" cy="87" r="3.5" fill="#16a34a"/><text x="279" y="91">Paradise雪山野花</text>
+      <text x="290" y="38" fill="#7c3aed">8/8 ✈ 回JFK</text>
+    </g>
+    <g font-weight="700">
+      <circle cx="92" cy="420" r="10" fill="#16a34a"/><text x="92" y="424" fill="#fff" font-size="12" text-anchor="middle">1</text>
+      <text x="108" y="428" font-size="12" fill="#166534">8/3 宿Trinidad海边</text>
+      <circle cx="153" cy="340" r="10" fill="#16a34a"/><text x="153" y="344" fill="#fff" font-size="12" text-anchor="middle">2</text>
+      <text x="130" y="386" font-size="12" fill="#166534">8/4 宿Grants Pass·快艇晚餐</text>
+      <circle cx="201" cy="162" r="10" fill="#16a34a"/><text x="201" y="166" fill="#fff" font-size="12" text-anchor="middle">3</text>
+      <text x="100" y="178" font-size="12" fill="#166534">8/5 宿波特兰</text>
+      <circle cx="249" cy="89" r="10" fill="#16a34a"/><text x="249" y="93" fill="#fff" font-size="12" text-anchor="middle">4</text>
+      <text x="290" y="112" font-size="12" fill="#166534">8/6 宿Ashford山脚</text>
+      <circle cx="227" cy="41" r="10" fill="#16a34a"/><text x="227" y="45" fill="#fff" font-size="12" text-anchor="middle">5</text>
+      <text x="120" y="34" font-size="12" fill="#166534">8/7 宿西雅图</text>
+    </g>
+  </svg>
+  <div class="legend"><span>圆圈数字 = 第几晚的过夜地，对应下方日卡编号 ①–⑥；虚线 = 顺路小支线</span></div>
+  </div>
+
+  <div class="day"><div class="day-h"><b>8/3 周一 · Berkeley → 巨人大道红杉隧道</b><span class="meta">🚗 4h+0.5h ｜ 宿 Eureka / Trinidad</span></div>
+    <div class="day-info">
+      <div class="mini-map"><b>当天地图</b><div class="route-line"><span>Berkeley</span><i></i><span>Leggett</span><i></i><span>巨人大道</span><i></i><span>Trinidad</span></div><a class="map-link" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;origin=Berkeley,CA&amp;destination=Trinidad,CA&amp;waypoints=Chandelier+Drive-Thru+Tree,Leggett,CA|Avenue+of+the+Giants,CA">打开 8/3 Google 地图</a></div>
+      <div class="travel-info"><div class="info-chip"><strong>路线</strong>US-101 北上，Leggett 树洞后接巨人大道</div><div class="info-chip"><strong>住宿</strong>Eureka 更方便，Trinidad 海边更有度假感</div><div class="info-chip"><strong>车程</strong>约4.5小时，Willits 适合中途休息</div><div class="info-chip"><strong>提醒</strong>海边早晚有雾，外套放车上</div></div>
+    </div>
+    <div class="day-photos">
+      <div class="ph" data-photo-slot="D-0803-chandelier-tree" data-emoji="🌳"><img src="assets/images/d/0803-chandelier-tree.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Leggett：Chandelier Tree 开车穿树洞</div></div>
+      <div class="ph" data-photo-slot="D-0803-avenue-giants" data-emoji="🌲"><img src="assets/images/d/0803-avenue-of-the-giants.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Avenue of the Giants：巨人大道红杉隧道</div></div>
+      <div class="ph" data-photo-slot="D-0803-trinidad-coast" data-emoji="🌊"><img src="assets/images/d/0803-trinidad-coast.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Trinidad 海岸：灯塔小镇/海边日落</div></div>
+    </div>
+    <div class="tl">
+      <div class="row"><div class="t">09:30</div><div class="x"><span class="drv">🚗 US-101 北上（约3h到Leggett）</span><small>出发前确认租车合同为「西雅图还车」单程价；中途 Willits 休息</small></div></div>
+      <div class="row"><div class="t">12:30</div><div class="x">🌳 <b>开车穿树洞</b>：Leggett 的 Chandelier Tree——汽车从活着的红杉树洞里开过去（~$15/车）<small>就在101路边，拍照+小卖部午餐，30-40min</small></div></div>
+      <div class="row"><div class="t">14:30</div><div class="x">Avenue of the Giants 巨人大道——50km老公路穿行在百米高红杉之间<small>车就开在树的隧道里，随停随拍；Founders Grove 平路环线走10-20min（世界最高树种就在头顶）</small></div></div>
+      <div class="row"><div class="t">16:30</div><div class="x"><span class="drv">🚗 → Eureka/Trinidad（1h）</span>，海边小镇入住<small>Trinidad 灯塔小渔村更美，海鲜晚餐</small></div></div>
+    </div>
+    <div class="day-f"><span>👟 步行：≤1.5km平路</span><span>🌡️ 海岸 15-20°C，早晚有雾要外套</span><span>⏳ 无</span></div>
+  </div>
+
+  <div class="day"><div class="day-h"><b>8/4 周二 · 红杉国家公园 → 树冠缆车 → 峡谷快艇晚餐</b><span class="meta">🚗 1h+2.5h ｜ 宿 Grants Pass</span></div>
+    <div class="day-info">
+      <div class="mini-map"><b>当天地图</b><div class="route-line"><span>Trinidad</span><i></i><span>Redwood NP</span><i></i><span>Klamath</span><i></i><span>Grants Pass</span></div><a class="map-link" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;origin=Trinidad,CA&amp;destination=Grants+Pass,OR&amp;waypoints=Redwood+National+and+State+Parks|Trees+of+Mystery,Klamath,CA">打开 8/4 Google 地图</a></div>
+      <div class="travel-info"><div class="info-chip"><strong>路线</strong>海岸红杉段 + US-199 溪谷公路</div><div class="info-chip"><strong>住宿</strong>Grants Pass，方便接 Hellgate 晚餐船</div><div class="info-chip"><strong>车程</strong>约3.5小时，下午17:00前到镇上</div><div class="info-chip"><strong>预订</strong>Hellgate 快艇晚餐游需提前锁票</div></div>
+    </div>
+    <div class="day-photos">
+      <div class="ph" data-photo-slot="D-0804-redwood-big-tree" data-emoji="🌲"><img src="assets/images/d/0804-redwood-big-tree-newton-drury.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Redwood NP：Big Tree / Newton Drury 公路</div></div>
+      <div class="ph" data-photo-slot="D-0804-trees-mystery" data-emoji="🚡"><img src="assets/images/d/0804-trees-of-mystery-skytrail.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Trees of Mystery：红杉树冠缆车</div></div>
+      <div class="ph" data-photo-slot="D-0804-hellgate-jetboat" data-emoji="🚤"><img src="assets/images/d/0804-hellgate-canyon-jetboat.jpeg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Hellgate Canyon：Rogue 河快艇晚餐游</div></div>
+    </div>
+    <div class="tl">
+      <div class="row"><div class="t">09:30</div><div class="x"><span class="drv">🚗 北上 Redwood 国家公园段（1h）</span></div></div>
+      <div class="row"><div class="t">10:30</div><div class="x">Big Tree Wayside（停车走200m看巨树）+ Newton Drury 景观公路穿老熟林<small>想多看一点：Lady Bird Johnson Grove 平缓环线2.2km，可走可不走</small></div></div>
+      <div class="row"><div class="t">12:00</div><div class="x">🚡 <b>红杉树冠缆车</b>：Klamath 的 Trees of Mystery，SkyTrail 缆车升到树冠层俯瞰红杉海<small>零体力，~$30/人；园内简餐或 Crescent City 午餐</small></div></div>
+      <div class="row"><div class="t">14:30</div><div class="x"><span class="drv">🚗 US-199 红杉峡谷公路 → Grants Pass（2.5h）</span><small>US-199 本身就是一条红杉+溪谷景观路；17:00前到即可</small></div></div>
+      <div class="row"><div class="t">17:30</div><div class="x">🚤 <b>Hellgate 峡谷快艇晚餐游</b>（约4h，$83/人，<span class="q">需提前订</span>）<small>坐着不动穿 Rogue 河 Hellgate 峡谷+河畔庄园自助晚餐，温和不刺激，爸妈最爱款；订不到就改2h观光版($58)+镇上晚餐</small></div></div>
+    </div>
+    <div class="day-f"><span>👟 步行：≤2.5km，全平</span><span>🌡️ 内陆升到28-32°C，船上凉快</span><span class="q">⏳ 快艇需预订</span></div>
+  </div>
+
+  <div class="day"><div class="day-h"><b>8/5 周三 · 火山湖环湖 → 波特兰（最重的一天）</b><span class="meta">🚗 2h+4h ｜ 宿波特兰</span></div>
+    <div class="day-info">
+      <div class="mini-map"><b>当天地图</b><div class="route-line"><span>Grants Pass</span><i></i><span>Crater Lake</span><i></i><span>Eugene</span><i></i><span>Portland</span></div><a class="map-link" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;origin=Grants+Pass,OR&amp;destination=Portland,OR&amp;waypoints=Crater+Lake+National+Park|Eugene,OR">打开 8/5 Google 地图</a></div>
+      <div class="travel-info"><div class="info-chip"><strong>路线</strong>上午上火山湖，下午 I-5 北上波特兰</div><div class="info-chip"><strong>住宿</strong>波特兰市区，晚餐和补给选择多</div><div class="info-chip"><strong>车程</strong>约6小时，是 D 方案最重的一天</div><div class="info-chip"><strong>提醒</strong>湖区海拔高，早晚温差大</div></div>
+    </div>
+    <div class="day-photos">
+      <div class="ph" data-photo-slot="D-0805-crater-lake-rim" data-emoji="🌋"><img src="assets/images/d/0805-crater-lake-rim-village.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Crater Lake：Rim Village 第一眼火山湖</div></div>
+      <div class="ph" data-photo-slot="D-0805-wizard-island" data-emoji="🏝️"><img src="assets/images/d/0805-watchman-overlook-wizard-island.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Watchman Overlook：巫师岛视角</div></div>
+      <div class="ph" data-photo-slot="D-0805-crater-lake-lodge" data-emoji="🏨"><img src="assets/images/d/0805-crater-lake-lodge.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Crater Lake Lodge：湖畔百年老屋</div></div>
+    </div>
+    <div class="tl">
+      <div class="row"><div class="t">09:00</div><div class="x"><span class="drv">🚗 从 Grants Pass 上山进火山湖国家公园（2h，$30/车）</span><small>今天出发稍早，值得</small></div></div>
+      <div class="row"><div class="t">10:30</div><div class="x">Rim Village 第一眼火山口湖——直径10km、594m深、蓝得发黑<small>观景台就在停车场边；沿西环湖公路停 Discovery Point、Watchman Overlook（看巫师岛最佳）</small></div></div>
+      <div class="row"><div class="t">12:30</div><div class="x">湖畔百年老屋 Crater Lake Lodge 午餐（窗外就是湖）<small>2026年湖岸步道施工、无游船——本来也不适合爸妈走，环湖观景台全开放不受影响</small></div></div>
+      <div class="row"><div class="t">14:00</div><div class="x"><span class="drv">🚗 → 波特兰（4h，I-5一路高速）</span><small class="q">全程最长一段车，中途 Eugene 休息加油；爸妈车上补觉</small></div></div>
+      <div class="row"><div class="t">18:30</div><div class="x">入住波特兰市区，晚餐（美食车公园/Powell's书店随意逛）</div></div>
+    </div>
+    <div class="day-f"><span>👟 步行：观景台级</span><span>🌡️ 湖区海拔2100m，24/8°C</span><span>⏳ 无预约；正午Rim Village停车稍紧</span></div>
+  </div>
+
+  <div class="day"><div class="day-h"><b>8/6 周四 · 大瀑布+明轮船 → 雷尼尔山脚 · 傍晚上天堂</b><span class="meta">🚗 0.5h+2.5h+0.7h ｜ 宿 Ashford</span></div>
+    <div class="day-info">
+      <div class="mini-map"><b>当天地图</b><div class="route-line"><span>Portland</span><i></i><span>Multnomah</span><i></i><span>Cascade Locks</span><i></i><span>Ashford</span><i></i><span>Paradise</span></div><a class="map-link" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;origin=Portland,OR&amp;destination=Paradise,Mount+Rainier+National+Park,WA&amp;waypoints=Multnomah+Falls,OR|Cascade+Locks,OR|Ashford,WA">打开 8/6 Google 地图</a></div>
+      <div class="travel-info"><div class="info-chip"><strong>路线</strong>哥伦比亚河谷看瀑布，再北上雷尼尔山脚</div><div class="info-chip"><strong>住宿</strong>Ashford 木屋/旅馆，第二天上山最顺</div><div class="info-chip"><strong>车程</strong>约3.7小时，不含明轮船时间</div><div class="info-chip"><strong>预订</strong>Multnomah I-84 停车许可 + 明轮船班次</div></div>
+    </div>
+    <div class="day-photos">
+      <div class="ph" data-photo-slot="D-0806-multnomah-falls" data-emoji="💧"><img src="assets/images/d/0806-multnomah-falls.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Multnomah Falls：两级大瀑布</div></div>
+      <div class="ph" data-photo-slot="D-0806-columbia-sternwheeler" data-emoji="⛴️"><img src="assets/images/d/0806-columbia-gorge-sternwheeler.jpeg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Cascade Locks：哥伦比亚河峡谷明轮船</div></div>
+      <div class="ph" data-photo-slot="D-0806-rainier-paradise-evening" data-emoji="🗻"><img src="assets/images/d/0806-rainier-paradise-evening.jpeg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Mt. Rainier Paradise：傍晚雪山野花</div></div>
+    </div>
+    <div class="tl">
+      <div class="row"><div class="t">09:30</div><div class="x"><span class="drv">🚗 I-84 东行30min</span> Multnomah 瀑布——189m两级大瀑布，停车场对面即是<small class="q">⏳ 9:00-18:00使用I-84停车场需$2定时许可：7/23早7点PT（纽约早10点）在recreation.gov抢8/6的9:00-10:00时段，两天前有第二波放票</small><small>走到观瀑桥仅300m缓坡；8-10点人最少</small></div></div>
+      <div class="row"><div class="t">11:30</div><div class="x">⛴️ <b>百年明轮船游峡谷</b>（可选）：往东20min到 Cascade Locks 码头，Sternwheeler 明轮船1-2h哥伦比亚峡谷巡游<small>坐着看两岸千米崖壁+瀑布群；订午间班次可在船上/码头午餐。若当天没有合适班次，改停 Vista House 观景台后直接北上，把时间留给傍晚的雪山</small></div></div>
+      <div class="row"><div class="t">13:30</div><div class="x"><span class="drv">🚗 北上华盛顿州 → Ashford（2.5h）</span>，入住木屋旅馆</div></div>
+      <div class="row"><div class="t">17:00</div><div class="x"><span class="drv">🚗 上 Paradise（40min，$30/车，2026无需预约）</span>傍晚的野花草甸+金色雪山<small>此时停车场空、光线最好、旱獭出没——比周末白天体验好一个档次；8月日落约20:30，时间很够</small></div></div>
+      <div class="row"><div class="t">19:45</div><div class="x">下山回 Ashford 晚餐</div></div>
+    </div>
+    <div class="day-f"><span>👟 步行：瀑布300m+草甸随意</span><span>🌡️ 山上 17/8°C 带外套</span><span class="q">⏳ 瀑布$2许可</span></div>
+  </div>
+
+  <div class="day"><div class="day-h"><b>8/7 周五 · 蒸汽小火车 → 天堂野花 → 西雅图</b><span class="meta">🚂 2h + 🚗 0.7h+2.5h ｜ 宿西雅图市区</span></div>
+    <div class="day-info">
+      <div class="mini-map"><b>当天地图</b><div class="route-line"><span>Ashford</span><i></i><span>Elbe</span><i></i><span>Paradise</span><i></i><span>Seattle</span></div><a class="map-link" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;origin=Ashford,WA&amp;destination=Seattle,WA&amp;waypoints=Elbe,WA|Paradise,Mount+Rainier+National+Park,WA|Reflection+Lakes,WA">打开 8/7 Google 地图</a></div>
+      <div class="travel-info"><div class="info-chip"><strong>路线</strong>Elbe 小火车后再上 Paradise，下山进西雅图</div><div class="info-chip"><strong>住宿</strong>西雅图市区，方便晚餐和次日船闸</div><div class="info-chip"><strong>车程</strong>约3.2小时，另加小火车约2小时</div><div class="info-chip"><strong>预订</strong>小火车不是每天开，先确认 8/7 班次</div></div>
+    </div>
+    <div class="day-photos">
+      <div class="ph" data-photo-slot="D-0807-elbe-steam-train" data-emoji="🚂"><img src="assets/images/d/0807-elbe-steam-train.webp" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Elbe：雷尼尔蒸汽小火车</div></div>
+      <div class="ph" data-photo-slot="D-0807-myrtle-falls" data-emoji="🌼"><img src="assets/images/d/0807-myrtle-falls-wildflowers.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Paradise：Myrtle Falls + 野花草甸</div></div>
+      <div class="ph" data-photo-slot="D-0807-kerry-park" data-emoji="🌆"><img src="assets/images/d/0807-kerry-park.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Kerry Park：西雅图天际线+雷尼尔山</div></div>
+    </div>
+    <div class="tl">
+      <div class="row"><div class="t">09:30</div><div class="x">🚂 <b>雷尼尔蒸汽小火车</b>：Ashford 旁的 Elbe 小镇出发，Elbe–Mineral 往返约2h<small class="q">只在部分日子开行，订票时先确认8/7有无班次（1925年Porter No.5蒸汽机车2026年复活首秀）</small><small>若当日无班次：直接上山，把 Paradise 逛得更慢</small></div></div>
+      <div class="row"><div class="t">12:00</div><div class="x">Ashford/Elbe 午餐</div></div>
+      <div class="row"><div class="t">13:00</div><div class="x">上 Paradise：Myrtle Falls 缓坡步道（往返1.2km，雪山倒影机位）+ 野花草甸<small>8月初野花顶峰；下山顺停 Reflection Lakes 倒影湖、Narada Falls（均停车即达）</small></div></div>
+      <div class="row"><div class="t">15:45</div><div class="x"><span class="drv">🚗 → 西雅图（2.5h）</span></div></div>
+      <div class="row"><div class="t">18:30</div><div class="x">入住市区；Kerry Park 观景台——雷尼尔雪山+天际线同框（白天刚亲近过的雪山此刻在城市背后）；Waterfront 海鲜晚餐</div></div>
+    </div>
+    <div class="day-f"><span>👟 步行：≤1.5km缓坡</span><span>🌡️ 山上17°C / 西雅图25°C</span><span class="q">⏳ 小火车看班次</span></div>
+  </div>
+
+  <div class="day"><div class="day-h"><b>8/8 周六 · 三文鱼洄游+西雅图半日 → 回纽约</b><span class="meta">✈️ SEA→JFK 约5.5h</span></div>
+    <div class="day-info">
+      <div class="mini-map"><b>当天地图</b><div class="route-line"><span>Seattle</span><i></i><span>Ballard</span><i></i><span>Pike Place</span><i></i><span>SEA</span></div><a class="map-link" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;origin=Seattle,WA&amp;destination=Seattle-Tacoma+International+Airport&amp;waypoints=Ballard+Locks,Seattle,WA|Pike+Place+Market,Seattle,WA|Chihuly+Garden+and+Glass,Seattle,WA">打开 8/8 Google 地图</a></div>
+      <div class="travel-info"><div class="info-chip"><strong>路线</strong>市区半日，最后去 SEA 机场还车</div><div class="info-chip"><strong>航班</strong>SEA → JFK 约5.5小时，尽量选白天/傍晚</div><div class="info-chip"><strong>车程</strong>市内移动为主，机场预留堵车时间</div><div class="info-chip"><strong>提醒</strong>还车时核对异地还车费和油量</div></div>
+    </div>
+    <div class="day-photos">
+      <div class="ph" data-photo-slot="D-0808-ballard-locks-salmon" data-emoji="🐟"><img src="assets/images/d/0808-ballard-locks-salmon.png" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Ballard 船闸：三文鱼鱼梯</div></div>
+      <div class="ph" data-photo-slot="D-0808-pike-place" data-emoji="🐟"><img src="assets/images/d/0808-pike-place-market.jpeg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Pike Place Market：飞鱼摊/午餐</div></div>
+      <div class="ph" data-photo-slot="D-0808-chihuly" data-emoji="🎨"><img src="assets/images/d/0808-chihuly-garden-glass.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Chihuly Garden and Glass：室内玻璃艺术</div></div>
+    </div>
+    <div class="tl">
+      <div class="row"><div class="t">10:00</div><div class="x">🐟 <b>Ballard 船闸看三文鱼洄游</b>——8月正是红鲑高峰<small>免费、全平地：看船过闸+玻璃观察窗里成群三文鱼爬鱼梯，爸妈一般都看呆</small></div></div>
+      <div class="row"><div class="t">11:30</div><div class="x">派克市场（飞鱼摊、第一家星巴克）午餐 + Chihuly 玻璃艺术园（室内）</div></div>
+      <div class="row"><div class="t">14:30</div><div class="x">机场还车（核对单程费账单）</div></div>
+      <div class="row"><div class="t">16:30</div><div class="x">✈️ 直飞纽约（约5.5h，落地约凌晨1点）<small>💡 爸妈不爱坐飞机→选白天这班而不是红眼：能看雪山和落基山日景，落地就回家睡。或改8/9早班机再多玩半天</small></div></div>
+    </div>
+    <div class="day-f"><span>👟 步行：城市闲逛</span><span>🌡️ 25°C</span><span>⏳ 安检预留2h</span></div>
+  </div>
+</div>
+
+<!-- ========== 方案E ========== -->
+<div class="panel on E" id="pe">
+  <div class="strip">
+    <div class="ph" data-photo-slot="E-overview-yosemite" data-emoji="🏔️"><img src="assets/images/e/0803-tunnel-view.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">优胜美地隧道观景点</div></div>
+    <div class="ph" data-photo-slot="E-overview-mono-lake" data-emoji="🌊"><img src="assets/images/e/0804-mono-lake-tufa.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">莫诺湖石灰塔</div></div>
+    <div class="ph" data-photo-slot="E-overview-zabriskie" data-emoji="🏜️"><img src="assets/images/e/0805-zabriskie-point.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">死亡谷 Zabriskie Point</div></div>
+    <div class="ph" data-photo-slot="E-overview-las-vegas" data-emoji="🎰"><img src="assets/images/e/0807-las-vegas-strip-night.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">拉斯维加斯</div></div>
+  </div>
+  <p class="sub" style="margin-bottom:4px">✅ 零国内航班 · 总车程仅约13h · 四种地貌反差拉满：花岗岩巨壁→高山湖→地球最热盐漠→赌城霓虹 · 8/6一天内完成「最高观景点→北美最低点→赌城」。⚠️ 死亡谷8月46-49°C，全部景点执行「车→观景台5-15分钟→回车」纪律；优胜美地8月瀑布基本干涸。</p>
+
+  <div class="mapbox" style="margin:14px 0 6px">
+  <svg viewBox="0 0 640 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+    <line x1="253" y1="0" x2="530" y2="232" stroke="#d1d5db" stroke-width="1"/>
+    <text x="130" y="150" fill="#c7ccd4" font-size="13" font-weight="700">加利福尼亚</text>
+    <text x="470" y="80" fill="#c7ccd4" font-size="13" font-weight="700">内华达</text>
+    <g stroke="#d97706" stroke-width="3.5" fill="none" stroke-linecap="round">
+      <path d="M68,55 C120,60 190,64 238,64"/>
+      <path d="M250,61 C263,55 272,50 278,47"/>
+      <path d="M283,50 C285,57 286,63 286,67"/>
+      <path d="M289,75 C310,101 330,127 343,146"/>
+      <path d="M351,152 C376,155 400,158 417,160"/>
+      <path d="M431,166 C450,170 470,175 486,177"/>
+      <path d="M493,178 C509,180 522,181 531,182"/>
+    </g>
+    <path d="M427,166 C429,170 430,173 430,176" stroke="#d97706" stroke-width="2" stroke-dasharray="4 3" fill="none"/>
+    <g fill="#6b7280" font-size="11">
+      <text x="140" y="48">🚗 4h</text>
+      <text x="240" y="40">Tioga 2.5h</text>
+      <text x="296" y="112">1.5h</text>
+      <text x="378" y="142">2h</text>
+      <text x="468" y="164">2h</text>
+    </g>
+    <g font-size="12" font-weight="600" fill="#1f2937">
+      <circle cx="68" cy="55" r="5" fill="#334155"/><text x="40" y="42">Berkeley 出发</text>
+      <circle cx="281" cy="45" r="3.5" fill="#d97706"/><text x="290" y="42">莫诺湖日落</text>
+      <circle cx="346" cy="150" r="3.5" fill="#d97706"/><text x="290" y="170">Lone Pine 惠特尼峰</text>
+      <circle cx="430" cy="178" r="3" fill="#d97706"/><text x="404" y="196">Badwater 盐滩</text>
+      <text x="560" y="200" fill="#7c3aed">8/8 ✈ 回JFK</text>
+    </g>
+    <g font-weight="700">
+      <circle cx="245" cy="64" r="10" fill="#d97706"/><text x="245" y="68" fill="#fff" font-size="12" text-anchor="middle">1</text>
+      <text x="200" y="90" font-size="12" fill="#92400e">8/3 宿优胜美地谷</text>
+      <circle cx="286" cy="71" r="10" fill="#d97706"/><text x="286" y="75" fill="#fff" font-size="12" text-anchor="middle">2</text>
+      <text x="302" y="76" font-size="12" fill="#92400e">8/4 宿Mammoth</text>
+      <circle cx="424" cy="160" r="10" fill="#d97706"/><text x="424" y="164" fill="#fff" font-size="12" text-anchor="middle">3</text>
+      <text x="404" y="142" font-size="12" fill="#92400e">8/5 宿死亡谷园内</text>
+      <circle cx="539" cy="182" r="10" fill="#7c3aed"/><text x="539" y="186" fill="#fff" font-size="10.5" text-anchor="middle">4·5</text>
+      <text x="500" y="216" font-size="12" fill="#7c3aed">8/6–8/7 宿拉斯维加斯</text>
+    </g>
+  </svg>
+  <div class="legend"><span>圆圈数字 = 第几晚的过夜地，对应下方日卡编号 ①–⑥</span></div>
+  </div>
+
+  <div class="day"><div class="day-h"><b>① 8/3 周一 · Berkeley → 优胜美地谷</b><span class="meta">🚗 4h ｜ 宿谷内 / El Portal</span></div>
+    <div class="day-info">
+      <div class="mini-map"><b>当天地图</b><div class="route-line"><span>Berkeley</span><i></i><span>Oakdale</span><i></i><span>Tunnel View</span><i></i><span>Yosemite Valley</span></div><a class="map-link" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;origin=Berkeley,CA&amp;destination=Yosemite+Valley,CA&amp;waypoints=Oakdale,CA|Tunnel+View,Yosemite+National+Park,CA">打开 8/3 Google 地图</a></div>
+      <div class="travel-info"><div class="info-chip"><strong>路线</strong>I-580 接 CA-120 进山，先到 Tunnel View</div><div class="info-chip"><strong>住宿</strong>首选 Yosemite Valley Lodge，订不到选 El Portal</div><div class="info-chip"><strong>车程</strong>约4小时，午后大门可能排队</div><div class="info-chip"><strong>提醒</strong>优胜美地谷内住宿是 E 方案最紧急预订项</div></div>
+    </div>
+    <div class="day-photos">
+      <div class="ph" data-photo-slot="E-0803-tunnel-view" data-emoji="🏔️"><img src="assets/images/e/0803-tunnel-view.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Tunnel View：半圆顶+酋长岩全景</div></div>
+      <div class="ph" data-photo-slot="E-0803-yosemite-valley" data-emoji="🪨"><img src="assets/images/e/0803-yosemite-valley.jpeg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">优胜美地谷：花岗岩巨壁</div></div>
+      <div class="ph" data-photo-slot="E-0803-bridalveil-fall" data-emoji="💧"><img src="assets/images/e/0803-bridalveil-fall.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Bridalveil Fall：8月水量较小</div></div>
+    </div>
+    <div class="tl">
+      <div class="row"><div class="t">09:30</div><div class="x"><span class="drv">🚗 I-580→CA-120 进山（3.5-4h含休息）</span><small>Oakdale 午餐；2026年无需预约，但<span class="q">周一午后大门仍可能排20-40min</span></small></div></div>
+      <div class="row"><div class="t">14:30</div><div class="x">Tunnel View 隧道观景点——半圆顶+酋长岩全景明信片机位（停车即达）</div></div>
+      <div class="row"><div class="t">15:30</div><div class="x">谷底漫游：El Capitan 草坪仰望酋长岩 + Bridalveil 步道（往返800m平路，8月水量小）</div></div>
+      <div class="row"><div class="t">18:00</div><div class="x">入住 Yosemite Valley Lodge（<span class="q">全行程最难订，现在就订</span>）或谷外 El Portal</div></div>
+    </div>
+    <div class="day-f"><span>👟 步行：1-2km平路</span><span>🌡️ 谷底 33/14°C</span><span class="q">⏳ 入园排队</span></div>
+  </div>
+
+  <div class="day"><div class="day-h"><b>② 8/4 周二 · 冰川点 → Tioga东穿 → 莫诺湖日落</b><span class="meta">🚗 1h+2.5h+0.5h ｜ 宿 Mammoth Lakes</span></div>
+    <div class="day-info">
+      <div class="mini-map"><b>当天地图</b><div class="route-line"><span>Yosemite Valley</span><i></i><span>Glacier Point</span><i></i><span>Tioga Road</span><i></i><span>Mono Lake</span><i></i><span>Mammoth</span></div><a class="map-link" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;origin=Yosemite+Valley,CA&amp;destination=Mammoth+Lakes,CA&amp;waypoints=Glacier+Point,Yosemite+National+Park,CA|Olmsted+Point,Yosemite+National+Park,CA|Tenaya+Lake,Yosemite+National+Park,CA|Mono+Lake+Tufa+State+Natural+Reserve,CA">打开 8/4 Google 地图</a></div>
+      <div class="travel-info"><div class="info-chip"><strong>路线</strong>冰川点后穿 Tioga Road 出东门</div><div class="info-chip"><strong>住宿</strong>Mammoth Lakes，海拔高、凉快、餐厅多</div><div class="info-chip"><strong>车程</strong>约4小时，路上观景点多</div><div class="info-chip"><strong>提醒</strong>冰川点停车要早，10:30后压力明显</div></div>
+    </div>
+    <div class="day-photos">
+      <div class="ph" data-photo-slot="E-0804-glacier-point" data-emoji="⛰️"><img src="assets/images/e/0804-glacier-point.webp" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Glacier Point：俯瞰半圆顶和谷底</div></div>
+      <div class="ph" data-photo-slot="E-0804-tenaya-lake" data-emoji="🌊"><img src="assets/images/e/0804-tenaya-lake.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Tenaya Lake：Tioga Road 高山湖</div></div>
+      <div class="ph" data-photo-slot="E-0804-mono-lake-tufa" data-emoji="🌊"><img src="assets/images/e/0804-mono-lake-tufa.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">莫诺湖 South Tufa：日落石灰塔</div></div>
+    </div>
+    <div class="tl">
+      <div class="row"><div class="t">09:00</div><div class="x">开车上冰川点 Glacier Point（1h盘山），俯瞰半圆顶+整个谷底<small class="q">⏳ 10:30后停车场基本满，这天稍早出门</small></div></div>
+      <div class="row"><div class="t">12:30</div><div class="x">回谷底午餐</div></div>
+      <div class="row"><div class="t">14:00</div><div class="x"><span class="drv">🚗 Tioga Road 东穿内华达山脉（2.5h含停留）</span><small>Olmsted Point 看半圆顶背面、Tenaya 蓝宝石湖、Tuolumne 草甸，每处路边停15-30min</small></div></div>
+      <div class="row"><div class="t">17:30</div><div class="x">出东门下山：莫诺湖 South Tufa 日落石灰塔（400m平路）——百万年古湖+外星感石塔</div></div>
+      <div class="row"><div class="t">19:30</div><div class="x">宿 Mammoth Lakes（海拔2400m，凉爽好睡，餐厅多）</div></div>
+    </div>
+    <div class="day-f"><span>👟 步行：约1.5km</span><span>🌡️ 高海拔 24/7°C</span><span class="q">⏳ 冰川点停车</span></div>
+  </div>
+
+  <div class="day"><div class="day-h"><b>③ 8/5 周三 · 395风景线南下 → 傍晚进死亡谷</b><span class="meta">🚗 1.5h+2h ｜ 宿园内 Furnace Creek</span></div>
+    <div class="day-info">
+      <div class="mini-map"><b>当天地图</b><div class="route-line"><span>Mammoth</span><i></i><span>Lone Pine</span><i></i><span>Mesquite Dunes</span><i></i><span>Furnace Creek</span><i></i><span>Zabriskie</span></div><a class="map-link" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;origin=Mammoth+Lakes,CA&amp;destination=The+Ranch+At+Death+Valley,Furnace+Creek,CA&amp;waypoints=Lone+Pine,CA|Alabama+Hills,CA|Mesquite+Flat+Sand+Dunes,Death+Valley,CA|Zabriskie+Point,Death+Valley,CA">打开 8/5 Google 地图</a></div>
+      <div class="travel-info"><div class="info-chip"><strong>路线</strong>US-395 南下，Lone Pine 补给后进死亡谷</div><div class="info-chip"><strong>住宿</strong>Furnace Creek 园内 The Ranch/Oasis</div><div class="info-chip"><strong>车程</strong>约3.5小时，不含各观景点停留</div><div class="info-chip"><strong>提醒</strong>进谷前加满油，每人备足 4L 水</div></div>
+    </div>
+    <div class="day-photos">
+      <div class="ph" data-photo-slot="E-0805-alabama-hills" data-emoji="🏔️"><img src="assets/images/e/0805-alabama-hills.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Alabama Hills：远眺惠特尼峰</div></div>
+      <div class="ph" data-photo-slot="E-0805-mesquite-dunes" data-emoji="🏜️"><img src="assets/images/e/0805-mesquite-flat-dunes.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Mesquite Flat 沙丘：车边短停</div></div>
+      <div class="ph" data-photo-slot="E-0805-zabriskie-point" data-emoji="🌄"><img src="assets/images/e/0805-zabriskie-point.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Zabriskie Point：金色恶地</div></div>
+    </div>
+    <div class="tl">
+      <div class="row"><div class="t">10:00</div><div class="x"><span class="drv">🚗 US-395 南下 Lone Pine（1.5h）</span>：Alabama Hills 电影小镇午餐，远眺惠特尼峰（美国本土最高点4421m）<small>顺路加满油、每人备足4L水——进谷前最后补给</small></div></div>
+      <div class="row"><div class="t">14:00</div><div class="x"><span class="drv">🚗 CA-190 东进死亡谷（2h，$30/车）</span><small>Father Crowley 观景台、Mesquite 沙丘（均车边即达，正午高温每站≤10min）</small></div></div>
+      <div class="row"><div class="t">16:30</div><div class="x">入住园内 The Ranch/Oasis at Death Valley（8月是淡季，好订且便宜，泳池是泉水恒温）</div></div>
+      <div class="row"><div class="t">19:30</div><div class="x">🌄 Zabriskie Point 日落——金色恶地褶皱全程最出片（停车场走100m缓坡）</div></div>
+      <div class="row"><div class="t">21:30</div><div class="x">🌌 酒店门口抬头：死亡谷是金级暗夜公园，肉眼银河<small>8月中旬还赶上英仙座流星雨前奏</small></div></div>
+    </div>
+    <div class="day-f"><span>👟 步行：每站≤10min</span><span>🌡️ 谷底 47/31°C——严格车边活动</span><span>⏳ 无</span></div>
+  </div>
+
+  <div class="day"><div class="day-h"><b>④ 8/6 周四 · 死亡谷早场 → 午后拉斯维加斯</b><span class="meta">🚗 环谷1.5h + 2h ｜ 宿 Vegas Strip</span></div>
+    <div class="day-info">
+      <div class="mini-map"><b>当天地图</b><div class="route-line"><span>Furnace Creek</span><i></i><span>Badwater</span><i></i><span>Artists</span><i></i><span>Dante's View</span><i></i><span>Vegas</span></div><a class="map-link" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;origin=The+Ranch+At+Death+Valley,Furnace+Creek,CA&amp;destination=Las+Vegas+Strip,NV&amp;waypoints=Badwater+Basin,Death+Valley,CA|Artists+Palette,Death+Valley,CA|Dante's+View,Death+Valley,CA|Pahrump,NV">打开 8/6 Google 地图</a></div>
+      <div class="travel-info"><div class="info-chip"><strong>路线</strong>死亡谷早场观景，午后经 Pahrump 去 Vegas</div><div class="info-chip"><strong>住宿</strong>Vegas Strip，下午直接休息避暑</div><div class="info-chip"><strong>车程</strong>环谷约1.5小时 + 出谷约2小时</div><div class="info-chip"><strong>提醒</strong>10点后只做车边点，盐滩不深入走</div></div>
+    </div>
+    <div class="day-photos">
+      <div class="ph" data-photo-slot="E-0806-badwater-basin" data-emoji="🤍"><img src="assets/images/e/0806-badwater-basin.jpeg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Badwater Basin：北美最低点盐滩</div></div>
+      <div class="ph" data-photo-slot="E-0806-artists-palette" data-emoji="🎨"><img src="assets/images/e/0806-artists-palette.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Artist's Palette：彩色矿物山丘</div></div>
+      <div class="ph" data-photo-slot="E-0806-dantes-view" data-emoji="🏜️"><img src="assets/images/e/0806-dantes-view.png" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Dante's View：高处俯瞰盐滩</div></div>
+    </div>
+    <div class="tl">
+      <div class="row"><div class="t">09:00</div><div class="x">趁"凉"（~35°C）：Badwater 盆地——海平面下86m北美最低点，白色盐滩走5分钟</div></div>
+      <div class="row"><div class="t">10:00</div><div class="x">Artists Drive 调色盘彩丘单行环线（全程车内，Artist's Palette 下车拍照3分钟）</div></div>
+      <div class="row"><div class="t">11:00</div><div class="x">Dante's View 但丁观景台（海拔1670m，比谷底凉12°C）——刚才走过的盐滩此刻在1.6km脚下</div></div>
+      <div class="row"><div class="t">12:00</div><div class="x"><span class="drv">🚗 出谷经 Pahrump → Vegas（2h）</span>，途中午餐</div></div>
+      <div class="row"><div class="t">14:30</div><div class="x">入住 Strip 酒店，午后泳池/小憩避暑</div></div>
+      <div class="row"><div class="t">19:00</div><div class="x">百乐宫音乐喷泉 + Strip 夜游<small>一天之内：最高观景点→北美最低点→赌城霓虹，反差感是这条线的高潮</small></div></div>
+    </div>
+    <div class="day-f"><span>👟 步行：车边级 + Strip闲逛</span><span>🌡️ 谷底早晨35°C → Vegas 41°C（夜间活动）</span><span>⏳ 酒店check-in</span></div>
+  </div>
+
+  <div class="day"><div class="day-h"><b>8/7 周五 · Vegas 弹性日（三选一）</b><span class="meta">🚗 0–4h ｜ 宿 Vegas</span></div>
+    <div class="day-info">
+      <div class="mini-map"><b>当天地图</b><div class="route-line"><span>Vegas</span><i></i><span>Hoover Dam</span><i></i><span>Strip</span><i></i><span>Show</span></div><a class="map-link" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;origin=Las+Vegas+Strip,NV&amp;destination=Las+Vegas+Strip,NV&amp;waypoints=Hoover+Dam,NV|Bellagio+Conservatory+and+Botanical+Gardens,Las+Vegas,NV|The+Venetian+Las+Vegas,NV">打开 8/7 Google 地图</a></div>
+      <div class="travel-info"><div class="info-chip"><strong>路线</strong>默认胡佛水坝半日 + Strip 室内休整</div><div class="info-chip"><strong>住宿</strong>继续住 Vegas，不换酒店最省力</div><div class="info-chip"><strong>车程</strong>不出城为0；胡佛水坝往返约1.5小时</div><div class="info-chip"><strong>预订</strong>O秀/魔术等晚间演出提前买票</div></div>
+    </div>
+    <div class="day-photos">
+      <div class="ph" data-photo-slot="E-0807-hoover-dam" data-emoji="🏗️"><img src="assets/images/e/0807-hoover-dam.webp" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">胡佛水坝：半日轻松往返</div></div>
+      <div class="ph" data-photo-slot="E-0807-las-vegas-strip" data-emoji="🎰"><img src="assets/images/e/0807-las-vegas-strip-night.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Las Vegas Strip：喷泉和酒店群</div></div>
+      <div class="ph" data-photo-slot="E-0807-bellagio-conservatory" data-emoji="🌿"><img src="assets/images/e/0807-bellagio-conservatory.webp" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Bellagio Conservatory：白天室内避暑</div></div>
+    </div>
+    <div class="tl">
+      <div class="row"><div class="t">A</div><div class="x">🏗️ 半日胡佛水坝（45min车程）：坝顶+室内发电机组导览，午后回酒店休息，晚上 O秀/大卫·科波菲尔魔术（提前购票）</div></div>
+      <div class="row"><div class="t">B</div><div class="x">😴 全休整日：睡到自然醒，百乐宫植物园+威尼斯人室内运河，奥特莱斯，泳池</div></div>
+      <div class="row"><div class="t">C</div><div class="x">🏞️ 实在想要大峡谷：西缘 Skywalk 玻璃桥一日游（单程2h，~$70/人）<small>景观比南缘打七折，仅作打卡选项</small></div></div>
+    </div>
+    <div class="day-f"><span>👟 步行：随意</span><span>🌡️ 41/29°C，白天室内为主</span><span>⏳ 秀票提前买</span></div>
+  </div>
+
+  <div class="day"><div class="day-h"><b>8/8 周六 · 赌城室内日 → 回纽约</b><span class="meta">✈️ LAS→JFK 约5h</span></div>
+    <div class="day-info">
+      <div class="mini-map"><b>当天地图</b><div class="route-line"><span>Strip</span><i></i><span>室内酒店群</span><i></i><span>LAS</span><i></i><span>JFK</span></div><a class="map-link" target="_blank" href="https://www.google.com/maps/dir/?api=1&amp;origin=Las+Vegas+Strip,NV&amp;destination=Harry+Reid+International+Airport,Las+Vegas,NV&amp;waypoints=Bellagio+Las+Vegas,NV|The+Venetian+Las+Vegas,NV">打开 8/8 Google 地图</a></div>
+      <div class="travel-info"><div class="info-chip"><strong>路线</strong>上午室内闲逛，下午机场还车</div><div class="info-chip"><strong>航班</strong>LAS → JFK 约5小时；8/9早班会更舒服</div><div class="info-chip"><strong>车程</strong>Strip 到机场通常15-25分钟，留足还车时间</div><div class="info-chip"><strong>提醒</strong>还车时检查异地还车费和油量账单</div></div>
+    </div>
+    <div class="day-photos">
+      <div class="ph" data-photo-slot="E-0808-las-vegas-strip-day" data-emoji="🎰"><img src="assets/images/e/0808-las-vegas-strip-day.jpeg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Strip 白天版：短距离室内外切换</div></div>
+      <div class="ph" data-photo-slot="E-0808-venetian" data-emoji="🛶"><img src="assets/images/e/0808-venetian.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">威尼斯人：室内运河</div></div>
+      <div class="ph" data-photo-slot="E-0808-las-airport" data-emoji="✈️"><img src="assets/images/e/0808-las-airport.png" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">LAS 机场：下午还车返程</div></div>
+    </div>
+    <div class="tl">
+      <div class="row"><div class="t">10:00</div><div class="x">自然醒；室内酒店群闲逛（全程空调）</div></div>
+      <div class="row"><div class="t">15:00</div><div class="x">机场还车（SF取LAS还，留意单程费）</div></div>
+      <div class="row"><div class="t">17:30</div><div class="x">✈️ 傍晚班直飞JFK（约5h，落地凌晨1点半）<small>💡 爸妈不爱红眼→改 8/9 早班机最舒服：8/8晚看个秀好好睡，8/9傍晚到家</small></div></div>
+    </div>
+    <div class="day-f"><span>👟 步行：随意</span><span>🌡️ 全天室内</span><span>⏳ 安检预留2h</span></div>
+  </div>
+</div>
+
+<!-- ================= 实用贴士 ================= -->
+<h2>🧳 实用贴士（针对爸妈中国护照 + 你不开车）</h2>
+<div class="tips">
+  <div class="tip"><b>💳 门票这样买</b><u>方案E</u>：到优胜美地大门买一张 $250「非居民版America the Beautiful年票」登记在爸爸名下——覆盖持卡人+同车3名成人的门票和$100/人附加费，连死亡谷$30也包了（散买$265，年票更省）。<u>方案D不用买年票</u>：火山湖/雷尼尔$30/车单买，红杉公园干脆免费。</div>
+  <div class="tip"><b>🚗 租车</b>爸爸主驾：护照+中国驾照+国际驾照(IDP)+本人信用卡。建议直接买全险（LDW+补充责任险）。妈妈若也有驾照可加为第二驾驶员，长途日轮换更安全。<b>两案都是异地还车</b>（E在Vegas还、D在西雅图还），单程费各家差很大（$0-500），订前把 Hertz/Avis/Enterprise 都比一遍。</div>
+  <div class="tip"><b>📆 现在就要订的（按紧急度）</b><u>定了E</u>：① 优胜美地谷内 Yosemite Valley Lodge / El Portal（全行程最难订，今天就下手）② 死亡谷园内 The Ranch/Oasis ③ Vegas 秀票（O秀/魔术）④ 机票开口票：纽约→旧金山进、拉斯维加斯→纽约出（推荐8/9早班）。<u>定了D</u>：① Hellgate 快艇晚餐游 + 蒸汽小火车班次 ② Ashford 木屋（选择少）③ <b>7/23 纽约时间早10点</b>抢 8/6 Multnomah $2 停车许可 ④ 开口票：西雅图→纽约出。</div>
+  <div class="tip"><b>🔥 死亡谷8月安全守则（方案E必读）</b>白天46-49°C：所有景点「车→观景台5-15分钟→回车」，10点后绝不走任何步道；每人备4L水；进谷前 Lone Pine 加满油、查胎压空调；谷内基本无手机信号，车抛锚留在车边等巡逻别步行求助；行程已把谷底项目排在早晚、正午在高处或车里。</div>
+  <div class="tip"><b>🌦️ 8月其他天气雷点</b><u>方案E</u>：死亡谷偶有季风雷暴引发山洪，见乌云不进峡谷型路段；全程加州/内华达同一时区，无换表烦恼。<u>方案D</u>：加州北部/俄勒冈是山火季，出发前3天查 fire.airnow.gov 沿线AQI，若火山湖烟重可用「波特兰+圣海伦斯火山」替换那半天。</div>
+  <div class="tip"><b>👴 节奏保护</b>每天真正「游玩」只排2-3个点，午后热时段都在车里/酒店；所有步行都可中途折返；给爸妈备：遮阳帽、墨镜、大水壶、防晒霜，以及高海拔早晚（冰川点/莫诺湖/火山湖/雷尼尔）的薄外套。</div>
+</div>
+
+<p class="src">政策来源：
+<a href="https://www.nps.gov/aboutus/nonresident-fees.htm">NPS 非居民收费官方页</a> ·
+<a href="https://yosemite.org/yosemite-entrance-reservations-not-required-2026/">Yosemite 2026 无需预约</a> ·
+<a href="https://www.nps.gov/deva/planyourvisit/summer-visits.htm">死亡谷夏季安全指南</a> ·
+<a href="https://www.nps.gov/mora/learn/news/mount-rainier-national-park-will-not-require-timed-entry-reservations-in-2026.htm">Mt. Rainier 2026 取消预约</a> ·
+<a href="https://www.nps.gov/crla/planyourvisit/conditions.htm">Crater Lake 2026 开放状况</a> ·
+<a href="https://www.recreation.gov/timed-entry/10089144">Multnomah 瀑布 $2 定时许可</a> ·
+<a href="https://hellgate.com/">Hellgate 快艇</a> ·
+<a href="https://mtrainierrailroad.com/">雷尼尔蒸汽小火车</a> ·
+<a href="https://sternwheeler.com/">哥伦比亚峡谷明轮船</a>
+· 生成日期 2026-07-12，出行前请复核。图片来自 Wikimedia Commons。</p>
+</div>
+
+<script>
+function show(id, el){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  el.classList.add('on');
+}
+</script>
+</body>
+</html>
