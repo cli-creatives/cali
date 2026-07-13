@@ -31,6 +31,12 @@
 
   .note{background:#fffbeb; border:1px solid #fcd34d; border-radius:12px; padding:14px 16px; margin:16px 0; font-size:14px;}
   .note b{color:var(--gold);}
+  .weather-choice{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px; margin:16px 0 8px;}
+  .weather-card{border:1.5px solid var(--line); border-radius:14px; padding:14px 16px; background:var(--card); font-size:14px;}
+  .weather-card b{display:block; font-size:15px; margin-bottom:4px;}
+  .weather-card.cool{border-color:#5eead4; background:#f0fdfa;}
+  .weather-card.hot{border-color:#fca5a5; background:#fff7ed;}
+  .weather-card small{display:block; color:var(--sub); margin-top:4px;}
 
   /* 地图 */
   .mapbox{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; margin-top:12px;}
@@ -122,9 +128,14 @@
   💡 <b>2026年新政策，先看这条：</b>从2026年起，11个热门国家公园对非美国居民收 <b>每人 $100 附加费</b>（16岁以上）。<b>优胜美地在名单上</b>（方案E散买合计$265，买一张 <b>$250 非居民版年票</b>反而省，持卡人+同车3名成人全覆盖）；<b>死亡谷、火山湖、雷尼尔、红杉都不在名单</b>（方案D合计仅~$62，年票不用买）。另外：<b>2026年 Yosemite、死亡谷、火山湖、Mt. Rainier 全部无需预约入园</b>，直接开进去即可。
 </div>
 
+<div class="weather-choice">
+  <div class="weather-card cool"><b>🌲 方案D · 西雅图方向：清爽舒服</b>一路往北，海岸红杉、火山湖、哥伦比亚河谷、雷尼尔雪山到西雅图，8月大多是 <b>15–28°C</b> 的凉爽山林天气。<small>更适合怕热、想慢慢看树、湖、雪山和城市的爸妈。</small></div>
+  <div class="weather-card hot"><b>🏜️ 方案E · 加州到拉斯维加斯：非常热</b>风景反差最强，但死亡谷和拉斯维加斯是高温核心：死亡谷白天可能 <b>46–49°C</b>，Vegas 约 <b>41°C</b>。<small>更适合能接受“早晚看景、白天躲车里/酒店/室内”的玩法。</small></div>
+</div>
+
 <!-- ================= 地图 ================= -->
 <h2>🗺️ 先看地图：两个方案在哪里</h2>
-<p class="sub">示意图（非精确比例）。两条路线都从Berkeley出发、<b>全程零国内航班</b>，但方向完全相反：<b>方案E一路向东南</b>——翻过内华达山、穿过地球最热的死亡谷、收尾在赌城（拉斯维加斯直飞回纽约）；<b>方案D一路向北</b>——沿太平洋经红杉巨树、火山湖开到西雅图（西雅图直飞回纽约），沿途串了树洞、缆车、快艇、明轮船、蒸汽火车一串体验（小绿点）。</p>
+<p class="sub">示意图（非精确比例）。两条路线都从Berkeley出发、<b>全程零国内航班</b>，但方向完全相反：<b>方案E一路向东南</b>——翻过内华达山、穿过地球最热的死亡谷、收尾在赌城，优点是震撼、车程短，缺点是<b>真的很热</b>；<b>方案D一路向北</b>——沿太平洋经红杉巨树、火山湖开到西雅图，优点是<b>清爽舒服</b>、自然节目多，缺点是总车程更长。</p>
 
 <div class="mapbox">
 <svg viewBox="0 0 640 710" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
@@ -218,7 +229,7 @@
     <td class="win">0 次（两案打平，爸妈都只坐来回两程跨州航班）</td></tr>
   <tr><td>风景类型</td>
     <td class="win">反差最大：花岗岩巨壁 → 外星感高山湖 → 地球最热的盐漠恶地 → 赌城霓虹；8/6一天内「最高观景点→北美最低点→赌城」</td>
-    <td>红杉巨树 → 全美最深火山口湖 → 巨瀑 → 冰川雪山野花——清凉「山林系」渐进</td></tr>
+    <td>红杉巨树 → 全美最深火山口湖 → 巨瀑 → 冰川雪山野花 → 西雅图海湾——清凉「山林+海风」渐进</td></tr>
   <tr><td>体验节目</td>
     <td>金级暗夜公园看银河、赌城秀/喷泉、胡佛水坝、（可选）大峡谷西缘玻璃桥</td>
     <td class="win">最丰富：开车穿树洞、树冠缆车、峡谷快艇晚餐、百年明轮船、蒸汽小火车、三文鱼洄游</td></tr>
@@ -229,8 +240,8 @@
     <td class="win">最低：死亡谷全部车边5-15分钟，Vegas随时回酒店</td>
     <td class="win">低：巨树林平路、环湖观景台、瀑布停车即达</td></tr>
   <tr><td>8月天气</td>
-    <td>山区凉爽；<span class="q">死亡谷47°C（已排早晚+车边）</span>、Vegas 41°C（夜间+室内）</td>
-    <td class="win">15-28°C 全程最舒适<br><small style="color:#9ca3af">⚠️ 8月俄勒冈偶有山火烟雾，行前看AQI</small></td></tr>
+    <td><span class="q">非常热的一条线</span>：优胜美地/莫诺湖山区凉爽，但死亡谷约46-49°C、Vegas约41°C；必须早晚看景、白天躲车里/酒店/室内</td>
+    <td class="win">清爽舒服的一条线：海岸、红杉、火山湖、雷尼尔、西雅图大多15-28°C<br><small style="color:#9ca3af">⚠️ 8月俄勒冈偶有山火烟雾，行前看AQI</small></td></tr>
   <tr><td>门票总成本(3人)</td>
     <td>~$250：优胜美地是附加费公园（散买$235）+死亡谷$30——买一张$250非居民年票反而省</td>
     <td class="win">~$62 最省：红杉免费、火山湖$30、雷尼尔$30，无附加费；体验项目另计</td></tr>
@@ -247,7 +258,7 @@
 
 <div class="verdict">
   <h3>🏆 决赛圈：E 和 D 都是好答案，选哪个看两个问题</h3>
-  <p><b>问题一：爸妈更想看「热烈的地质奇观」还是「清凉的山林」？</b>E 是反差流——花岗岩巨壁、外星湖、地球最热盐漠、赌城霓虹，情绪浓度高，且带回一句可以讲一辈子的「我们8月去过死亡谷」；D 是舒适流——红杉、火山湖、雪山野花，全程15-28°C，每天还有小火车/快艇这类节目。<b>问题二：爸爸愿意开多少？</b>E 只有13h（最轻方案，8/7还能整天不开车），D 要21h。怕热选D、怕开车选E；两案都是零国内航班、零公园预约。<b>唯一硬约束</b>：选E必须接受死亡谷的「车边观景」纪律（行程已把谷底活动全排在早晚），且现在就抢优胜美地谷内住宿。</p>
+  <p><b>问题一：爸妈更在意「清爽舒服」还是「震撼反差」？</b>D 是舒适流——西雅图方向一路往北，红杉、火山湖、雪山野花、海湾城市，全程大多15-28°C，体感最轻松；E 是反差流——优胜美地、莫诺湖、死亡谷、拉斯维加斯，风景更戏剧化，但死亡谷和Vegas非常热。<b>问题二：爸爸愿意开多少？</b>E 只有13h（最轻方案，8/7还能整天不开车），D 要21h。<b>怕热优先选D；怕开车优先选E。</b>如果选E，必须接受死亡谷「车边观景」纪律：早晚下车、正午不走步道、白天多在车里/酒店/室内。</p>
 </div>
 
 <!-- ================= 逐日行程 ================= -->
@@ -265,7 +276,7 @@
     <div class="ph" data-photo-slot="D-overview-multnomah" data-emoji="💧"><img src="assets/images/d/overview-multnomah-falls.jpeg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">Multnomah 瀑布</div></div>
     <div class="ph" data-photo-slot="D-overview-rainier" data-emoji="🗻"><img src="assets/images/d/overview-mount-rainier.webp" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">雷尼尔雪山</div></div>
   </div>
-  <p class="sub" style="margin-bottom:4px">✅ 零国内航班 · 3个国家公园顺路零回头 · 每天一个「非看景」节目：树洞→缆车→快艇→火山湖→明轮船→蒸汽火车→三文鱼。⚠️ 总车程约21h最长；需提前订：Hellgate快艇晚餐游、蒸汽小火车班次、7/23抢Multnomah $2停车许可；8月留意俄勒冈山火AQI。</p>
+  <p class="sub" style="margin-bottom:4px">✅ <b>清爽舒适线</b> · 零国内航班 · 3个国家公园顺路零回头 · 8月大多15-28°C，适合怕热的爸妈 · 每天一个「非看景」节目：树洞→缆车→快艇→火山湖→明轮船→蒸汽火车→三文鱼。⚠️ 总车程约21h最长；需提前订：Hellgate快艇晚餐游、蒸汽小火车班次、7/23抢Multnomah $2停车许可；8月留意俄勒冈山火AQI。</p>
 
   <div class="mapbox" style="margin:14px 0 6px">
   <svg viewBox="0 0 460 645" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:460px;height:auto;display:block;margin:0 auto;">
@@ -455,7 +466,7 @@
     <div class="ph" data-photo-slot="E-overview-zabriskie" data-emoji="🏜️"><img src="assets/images/e/0805-zabriskie-point.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">死亡谷 Zabriskie Point</div></div>
     <div class="ph" data-photo-slot="E-overview-las-vegas" data-emoji="🎰"><img src="assets/images/e/0807-las-vegas-strip-night.jpg" onerror="this.parentNode.classList.add('err')" alt=""><div class="cap">拉斯维加斯</div></div>
   </div>
-  <p class="sub" style="margin-bottom:4px">✅ 零国内航班 · 总车程仅约13h · 四种地貌反差拉满：花岗岩巨壁→高山湖→地球最热盐漠→赌城霓虹 · 8/6一天内完成「最高观景点→北美最低点→赌城」。⚠️ 死亡谷8月46-49°C，全部景点执行「车→观景台5-15分钟→回车」纪律；优胜美地8月瀑布基本干涸。</p>
+  <p class="sub" style="margin-bottom:4px">✅ <b>高温反差线</b> · 零国内航班 · 总车程仅约13h · 四种地貌反差拉满：花岗岩巨壁→高山湖→地球最热盐漠→赌城霓虹 · 8/6一天内完成「最高观景点→北美最低点→赌城」。⚠️ <b>这条线非常热</b>：死亡谷8月46-49°C，Vegas约41°C，全部景点执行「车→观景台5-15分钟→回车」纪律，白天尽量在车里、酒店或室内；优胜美地8月瀑布基本干涸。</p>
 
   <div class="mapbox" style="margin:14px 0 6px">
   <svg viewBox="0 0 640 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
